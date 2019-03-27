@@ -21,6 +21,6 @@ public class SetupGame : MonoBehaviour
 
     private int GetCameraHeight()
     {
-
+        return 0;
     }
 }

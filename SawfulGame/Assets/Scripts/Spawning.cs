@@ -6,13 +6,11 @@ public class Spawning : MonoBehaviour
 {
     public GameObject platforms;
 
-    private float timer;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameInfo.instance.SpawnRate;
+
     }
 
     // Update is called once per frame
@@ -22,23 +20,11 @@ public class Spawning : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns platforms at the given interval
+    /// Spawns a row of platforms at the given position
     /// </summary>
-    private void SpawnPlatforms()
+    public void SpawnRow(Vector3 pos)
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            timer = GameInfo.instance.SpawnRate;
-
-            //Generate letter or combination
-
-            //Generate 3 platforms
-
-            //Assign each platform a letter or combination
-            
-        }
+        
     }
 
     /// <summary>
