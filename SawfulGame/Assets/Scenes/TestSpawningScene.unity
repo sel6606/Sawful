@@ -217,9 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 589936857}
-  - component: {fileID: 589936858}
   - component: {fileID: 589936856}
-  - component: {fileID: 589936859}
   m_Layer: 0
   m_Name: Platforms
   m_TagString: Untagged
@@ -240,7 +238,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numCombo: 1
+  spawnInterval: 3
   spawn: {fileID: 1859063686}
+  playerPrefab: {fileID: 3746714483398909468, guid: 55274ee7790bb3a42b8dec6b8f70aeb4,
+    type: 3}
   platformPrefabs:
   - {fileID: 2517031725707058237, guid: a4c41a3153460814ea018f2baa98d149, type: 3}
   - {fileID: 1851335710255086377, guid: 542dbe301e4115344aab75f1150ac3d9, type: 3}
@@ -260,36 +261,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &589936858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 589936855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaae6e9e23b6b9b4ebbb2323f169e462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 3746714483398909468, guid: 55274ee7790bb3a42b8dec6b8f70aeb4, type: 3}
-  spawn: {fileID: 1859063686}
-  spawnInterval: 3
---- !u!114 &589936859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 589936855}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89784153d5d0c9241b32b3b9763aad14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testItem: {fileID: 2517031725707058237, guid: a4c41a3153460814ea018f2baa98d149,
-    type: 3}
-  spawn: {fileID: 1859063686}
 --- !u!1 &594107063
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,11 +664,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2647450668590885785, guid: 42a6995c1e97af8459fe46675e1e7310,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a6995c1e97af8459fe46675e1e7310, type: 3}

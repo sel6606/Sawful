@@ -6,15 +6,24 @@ using System.Linq;
 public class Spawning : MonoBehaviour
 {
     public int numCombo;
+    public float spawnInterval;
     public GameObject spawn;
+    public GameObject playerPrefab;
     public GameObject[] platformPrefabs;
     public List<GameObject> spawnedPlatforms;
 
+    private float cameraUpperBounds;
+    private float cameraLowerBounds;
+    private float platformExtentsY;
+    private float playerExtentsY;
+
+    #region COMMENTED OUT
     //private KeyCode[] keys = new KeyCode[]
     //{
     //    KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
     //    KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
     //};
+    #endregion
 
     private KeyCode[] keys = new KeyCode[]
     {
@@ -28,17 +37,60 @@ public class Spawning : MonoBehaviour
         set { spawnedPlatforms = value; }
     }
 
+    public float CameraUpperBounds
+    {
+        get { return cameraUpperBounds; }
+        set { cameraUpperBounds = value; }
+    }
+
+    public float CameraLowerBounds
+    {
+        get { return cameraLowerBounds; }
+        set { cameraLowerBounds = value; }
+    }
+
+    public float PlatformExtentsY
+    {
+        get { return platformExtentsY; }
+        set { platformExtentsY = value; }
+    }
+
+    public float PlayerExtentsY
+    {
+        get { return playerExtentsY; }
+        set { playerExtentsY = value; }
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetBoundsAndExtents();
+        SetupGame();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Gets the boundsY of the camera as well as the extentsY for a row.
+    /// </summary>
+    private void GetBoundsAndExtents()
+    {
+        //Get camera bounds
+        cameraUpperBounds = Camera.main.transform.position.y + Camera.main.orthographicSize;
+        cameraLowerBounds = Camera.main.transform.position.y - Camera.main.orthographicSize;
+
+        //Get the extents for a row
+        Platform platformScript = platformPrefabs[0].transform.GetChild(0).GetComponent<Platform>();
+        Bounds platformBounds = platformScript.platform.GetComponent<SpriteRenderer>().bounds;
+        platformExtentsY = platformBounds.extents.y;
+
+        //Get the extents for the player
+        playerExtentsY = playerPrefab.GetComponent<SpriteRenderer>().bounds.extents.y;
     }
 
     /// <summary>
@@ -62,28 +114,28 @@ public class Spawning : MonoBehaviour
         //Safe combination is always the last one in the list
         List<List<KeyCode>> combinations = GenerateCombinations();
 
+        int counter = 0;
+
         for (int i = 0; i < row.transform.childCount; i++)
         {
-            GameObject child = row.transform.GetChild(i).gameObject;
+            Platform platform = row.transform.GetChild(i).gameObject.GetComponent<Platform>();
 
-            //Saw Platform -  Get unsafe combination at the beginning of the list
-            if (child.CompareTag("Saw"))
+            //Saw Platform - Get unsafe combination
+            if (platform.CompareTag("Saw"))
             {
-                child.GetComponent<Platform>().IsSafe = false;
-                child.GetComponent<Platform>().Combination = combinations[0];
+                platform.IsSafe = false;
+                platform.Combination = combinations[counter];
+                platform.Target.transform.position = platform.transform.position + new Vector3(0, platformExtentsY + playerExtentsY, 0);
 
-                //Make sure to remove, to not use it again
-                combinations.RemoveAt(0);
+                counter++;
             }
 
             //Safe Platform - Get safe combination at the end of the list
-            else if (child.CompareTag("Safe"))
+            else if (platform.CompareTag("Safe"))
             {
-                child.GetComponent<Platform>().IsSafe = true;
-                child.GetComponent<Platform>().Combination = combinations[combinations.Count - 1];
-
-                //Make sure to remove, to not use it again
-                combinations.RemoveAt(combinations.Count - 1);
+                platform.IsSafe = true;
+                platform.Combination = combinations[combinations.Count - 1];
+                platform.Target.transform.position = platform.transform.position + new Vector3(0, platformExtentsY + playerExtentsY, 0);
             }
         }
 
@@ -165,5 +217,69 @@ public class Spawning : MonoBehaviour
 
         rand = Random.Range(0, keys.Length);
         return keys[rand];
+    }
+
+    /// <summary>
+    /// Spawns in the inital platforms and the player.
+    /// </summary>
+    private void SetupGame()
+    {
+        //Set the spawn position to match the spawn interval
+        spawn.transform.position += new Vector3(0, cameraUpperBounds + spawnInterval, 0);
+
+        //Spawn pos to generate the initial platforms
+        Vector3 spawnPos = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
+
+        //Spawn in the first row
+        SpawnRow(spawnPos);
+
+        //Setup the row to be the starting row
+        GameObject row = spawnedPlatforms[0];
+        PlatformRow rowScript = row.GetComponent<PlatformRow>();
+        rowScript.IsActive = true;
+        rowScript.HasPlayer = true;
+        rowScript.SendPlatforms();
+
+        //Spawn the player on the safe platfrom
+        for (int i = 0; i < row.transform.childCount; i++)
+        {
+            Platform platform = row.transform.GetChild(i).gameObject.GetComponent<Platform>();
+
+            if (platform.CompareTag("Safe"))
+            {
+                Vector3 playerPos = platform.Target.transform.position;
+                Instantiate(playerPrefab, playerPos, Quaternion.identity);
+
+                break;
+            }
+        }
+
+        Debug.Log("Spawned first row and player");
+
+        //Keep spawning rows until conditions are met to spawn a row off screen
+        while (spawnPos.y + platformExtentsY + spawnInterval < cameraUpperBounds)
+        {
+            //Update the position
+            spawnPos += new Vector3(0, platformExtentsY + spawnInterval, 0);
+
+            //Spawn the next row
+            SpawnRow(spawnPos);
+
+            //Setup the row to be on screen
+            GameObject nextRow = spawnedPlatforms[spawnedPlatforms.Count - 1];
+            PlatformRow nextRowScript = nextRow.GetComponent<PlatformRow>();
+            nextRowScript.IsActive = true;
+            nextRowScript.SendPlatforms();
+
+            Debug.Log("Spawned another row on screen");
+        }
+
+        //Update the position
+        spawnPos += new Vector3(0, platformExtentsY + spawnInterval, 0);
+
+        //Spawn the last row off screen
+        SpawnRow(spawnPos);
+
+        Debug.Log("Spawned last row off screen");
     }
 }

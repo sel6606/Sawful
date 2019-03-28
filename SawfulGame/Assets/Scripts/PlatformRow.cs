@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class attached to each row of platforms.
+/// </summary>
 public class PlatformRow : MonoBehaviour
 {
     private float extentsY;
@@ -26,7 +29,9 @@ public class PlatformRow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetBoundsAndExtents();
+        cameraUpperBounds = transform.parent.GetComponent<Spawning>().CameraUpperBounds;
+        cameraLowerBounds = transform.parent.GetComponent<Spawning>().CameraLowerBounds;
+        extentsY = transform.parent.GetComponent<Spawning>().PlatformExtentsY;
     }
 
     // Update is called once per frame
@@ -106,29 +111,5 @@ public class PlatformRow : MonoBehaviour
         }
 
         //SEND TO INPUT SCRIPT
-    }
-
-    /// <summary>
-    /// Sets the upper bounds of the camera and the extents for a row.
-    /// </summary>
-    private void SetBoundsAndExtents()
-    {
-        //Set camera bounds
-        Vector3 cameraCenter = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2, Camera.main.nearClipPlane));
-        cameraUpperBounds = cameraCenter.y + Camera.main.orthographicSize;
-        cameraLowerBounds = cameraCenter.y - Camera.main.orthographicSize;
-
-        //Set row upper bounds
-        extentsY = GetExtentsY();
-    }
-
-    /// <summary>
-    /// Gets the extents of the row.
-    /// </summary>
-    /// <returns>The extents of the row</returns>
-    public float GetExtentsY()
-    {
-        GameObject platform = transform.GetChild(0).GetComponent<Platform>().platform;
-        return platform.GetComponent<SpriteRenderer>().bounds.extents.y;
     }
 }
