@@ -12,16 +12,12 @@ public class GameInfo : MonoBehaviour
     public static GameInfo instance;
 
     public float moveSpeed;
-    public float spawnRate;
-    public int maxCombination;
 
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
 
     private float initialMoveSpeed;
-    private float initialSpawnRate;
-    private int initialCombination;
 
     public bool GameStart
     {
@@ -45,18 +41,6 @@ public class GameInfo : MonoBehaviour
     {
         get { return moveSpeed; }
         set { moveSpeed = value; }
-    }
-
-    public float SpawnRate
-    {
-        get { return spawnRate; }
-        set { spawnRate = value; }
-    }
-
-    public int MaxCombination
-    {
-        get { return maxCombination; }
-        set { maxCombination = value; }
     }
 
     void Awake()
@@ -86,17 +70,16 @@ public class GameInfo : MonoBehaviour
         gameOver = instance.gameOver;
         paused = instance.paused;
         moveSpeed = instance.moveSpeed;
-        spawnRate = instance.spawnRate;
-        maxCombination = instance.maxCombination;
         initialMoveSpeed = moveSpeed;
-        initialSpawnRate = spawnRate;
-        initialCombination = maxCombination;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!gameStart && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGame();
+        }
     }
 
     /// <summary>
@@ -108,9 +91,17 @@ public class GameInfo : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    public void ResetDistance()
+    /// <summary>
+    /// Temporary method to start the game.
+    /// We probably won't use this for the final build.
+    /// </summary>
+    public void StartGame()
+    {
+        gameStart = true;
+    }
+
+    public void ResetGame()
     {
         moveSpeed = initialMoveSpeed;
-        spawnRate = initialSpawnRate;
     }
 }
