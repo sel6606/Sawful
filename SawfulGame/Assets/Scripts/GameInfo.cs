@@ -16,7 +16,6 @@ public class GameInfo : MonoBehaviour
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
-    private GameObject playerInstance;
 
     private float initialMoveSpeed;
 
@@ -44,11 +43,6 @@ public class GameInfo : MonoBehaviour
         set { moveSpeed = value; }
     }
 
-    public GameObject PlayerInstance
-    {
-        get { return playerInstance; }
-        set { playerInstance = value; }
-    }
     void Awake()
     {
         //If there is not already a GameInfo object, set it to this

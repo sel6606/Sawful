@@ -47,8 +47,6 @@ public class Player : MonoBehaviour
         {
             gameObject.transform.position = nextPlat.Target.transform.position;
             gameObject.transform.parent = nextPlat.transform;
-            activeRows[0].HasPlayer = false;
-            activeRows[1].HasPlayer = true;
             activeRows.RemoveAt(0);
 
             if(!nextPlat.IsSafe)

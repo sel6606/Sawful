@@ -12,7 +12,6 @@ public class PlatformRow : MonoBehaviour
     private float cameraLowerBounds;
 
     private bool isActive;
-    private bool hasPlayer;
 
     private Player playerRef;
     private List<GameObject> platforms;
@@ -21,12 +20,6 @@ public class PlatformRow : MonoBehaviour
     {
         get { return isActive; }
         set { isActive = value; }
-    }
-
-    public bool HasPlayer
-    {
-        get { return hasPlayer; }
-        set { hasPlayer = value; }
     }
 
     public Player PlayerRef
@@ -99,7 +92,6 @@ public class PlatformRow : MonoBehaviour
 
         if (rowUpperBounds <= cameraLowerBounds)
         {
-            transform.parent.GetComponent<Spawning>().SpawnedPlatforms.Remove(gameObject);
             Destroy(gameObject);
         }
     }
@@ -125,6 +117,6 @@ public class PlatformRow : MonoBehaviour
         }
 
         //SEND TO INPUT SCRIPT
-        GameInfo.instance.PlayerInstance.GetComponent<Player>().AddRowToQueue(this);
+        transform.parent.GetComponent<Spawning>().PlayerInstance.GetComponent<Player>().AddRowToQueue(this);
     }
 }

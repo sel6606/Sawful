@@ -10,8 +10,8 @@ public class Spawning : MonoBehaviour
     public GameObject spawn;
     public GameObject playerPrefab;
     public GameObject[] platformPrefabs;
-    public List<GameObject> spawnedPlatforms;
 
+    private GameObject playerInstance;
     private float cameraUpperBounds;
     private float cameraLowerBounds;
     private float platformExtentsY;
@@ -30,11 +30,10 @@ public class Spawning : MonoBehaviour
         KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow
     };
 
-
-    public List<GameObject> SpawnedPlatforms
+    public GameObject PlayerInstance
     {
-        get { return spawnedPlatforms; }
-        set { spawnedPlatforms = value; }
+        get { return playerInstance; }
+        set { playerInstance = value; }
     }
 
     public float CameraUpperBounds
@@ -96,16 +95,17 @@ public class Spawning : MonoBehaviour
     /// <summary>
     /// Spawns a row of platforms at the spawn point.
     /// </summary>
-    public void SpawnRow()
+    public GameObject SpawnRow()
     {
-        SpawnRow(spawn.transform.position);
+        return SpawnRow(spawn.transform.position);
     }
 
     /// <summary>
     /// Spawns a row of platforms at the given position.
     /// </summary>
     /// <param name="pos">Position to spawn at</param>
-    public void SpawnRow(Vector3 pos)
+    /// <returns>The spawned row</returns>
+    public GameObject SpawnRow(Vector3 pos)
     {
         //Get a random row type
         int rand = Random.Range(0, platformPrefabs.Length);
@@ -139,7 +139,7 @@ public class Spawning : MonoBehaviour
             }
         }
 
-        spawnedPlatforms.Add(row);
+        return row;
     }
 
     /// <summary>
@@ -230,14 +230,10 @@ public class Spawning : MonoBehaviour
         //Spawn pos to generate the initial platforms
         Vector3 spawnPos = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0);
 
-        //Spawn in the first row
-        SpawnRow(spawnPos);
-
-        //Setup the row to be the starting row
-        GameObject row = spawnedPlatforms[0];
+        //Setup the first row to be the starting row
+        GameObject row = SpawnRow(spawnPos);
         PlatformRow rowScript = row.GetComponent<PlatformRow>();
         rowScript.IsActive = true;
-        rowScript.HasPlayer = true;
 
         //Spawn the player on the safe platfrom
         for (int i = 0; i < row.transform.childCount; i++)
@@ -247,7 +243,7 @@ public class Spawning : MonoBehaviour
             if (platform.CompareTag("Safe"))
             {
                 Vector3 playerPos = platform.Target.transform.position;
-                GameInfo.instance.PlayerInstance = Instantiate(playerPrefab, playerPos, Quaternion.identity, platform.transform);
+                playerInstance = Instantiate(playerPrefab, playerPos, Quaternion.identity, platform.transform);
 
                 break;
             }
@@ -263,11 +259,8 @@ public class Spawning : MonoBehaviour
             //Update the position
             spawnPos += new Vector3(0, platformExtentsY + spawnInterval, 0);
 
-            //Spawn the next row
-            SpawnRow(spawnPos);
-
-            //Setup the row to be on screen
-            GameObject nextRow = spawnedPlatforms[spawnedPlatforms.Count - 1];
+            //Setup the next row to be on screen
+            GameObject nextRow = SpawnRow(spawnPos);
             PlatformRow nextRowScript = nextRow.GetComponent<PlatformRow>();
             nextRowScript.IsActive = true;
             nextRowScript.SendPlatforms();
