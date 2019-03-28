@@ -87,6 +87,8 @@ public class GameInfo : MonoBehaviour
             gameStart = false;
             ReloadMainMenu();
         }
+
+        ExitGame();
     }
 
     /// <summary>
@@ -110,5 +112,13 @@ public class GameInfo : MonoBehaviour
     public void ResetGame()
     {
         moveSpeed = initialMoveSpeed;
+    }
+
+    public void ExitGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
