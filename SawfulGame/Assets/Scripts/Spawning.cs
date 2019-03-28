@@ -238,7 +238,6 @@ public class Spawning : MonoBehaviour
         PlatformRow rowScript = row.GetComponent<PlatformRow>();
         rowScript.IsActive = true;
         rowScript.HasPlayer = true;
-        rowScript.SendPlatforms();
 
         //Spawn the player on the safe platfrom
         for (int i = 0; i < row.transform.childCount; i++)
@@ -248,11 +247,13 @@ public class Spawning : MonoBehaviour
             if (platform.CompareTag("Safe"))
             {
                 Vector3 playerPos = platform.Target.transform.position;
-                Instantiate(playerPrefab, playerPos, Quaternion.identity);
+                GameInfo.instance.PlayerInstance = Instantiate(playerPrefab, playerPos, Quaternion.identity, platform.transform);
 
                 break;
             }
         }
+
+        rowScript.SendPlatforms();
 
         Debug.Log("Spawned first row and player");
 

@@ -14,6 +14,9 @@ public class PlatformRow : MonoBehaviour
     private bool isActive;
     private bool hasPlayer;
 
+    private Player playerRef;
+    private List<GameObject> platforms;
+
     public bool IsActive
     {
         get { return isActive; }
@@ -24,6 +27,17 @@ public class PlatformRow : MonoBehaviour
     {
         get { return hasPlayer; }
         set { hasPlayer = value; }
+    }
+
+    public Player PlayerRef
+    {
+        get { return playerRef; }
+        set { playerRef = value; }
+    }
+
+    public List<GameObject> Platforms
+    {
+        get { return platforms; }
     }
 
     // Start is called before the first frame update
@@ -103,7 +117,7 @@ public class PlatformRow : MonoBehaviour
     /// </summary>
     public void SendPlatforms()
     {
-        List<GameObject> platforms = new List<GameObject>();
+        platforms = new List<GameObject>();
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -111,5 +125,6 @@ public class PlatformRow : MonoBehaviour
         }
 
         //SEND TO INPUT SCRIPT
+        GameInfo.instance.PlayerInstance.GetComponent<Player>().AddRowToQueue(this);
     }
 }
