@@ -14,15 +14,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(activeRows.Count)
+        if (GameInfo.instance.GameStart && !GameInfo.instance.Paused && !GameInfo.instance.GameOver)
         {
-            case 0: //No rows are active
-            case 1:
-                //If we get here, either nothing has been initialized or we are at the top row and we do not currently need to do any checks
-                break;
-            default: //Two or more rows are active
-                ChangeRows();
-                break;
+            switch (activeRows.Count)
+            {
+                case 0: //No rows are active
+                case 1:
+                    //If we get here, either nothing has been initialized or we are at the top row and we do not currently need to do any checks
+                    break;
+                default: //Two or more rows are active
+                    ChangeRows();
+                    break;
+            }
         }
     }
 

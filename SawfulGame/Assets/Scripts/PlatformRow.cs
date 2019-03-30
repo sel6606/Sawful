@@ -7,13 +7,12 @@ using UnityEngine;
 /// </summary>
 public class PlatformRow : MonoBehaviour
 {
+    private Spawning spawner;
     private float extentsY;
     private float cameraUpperBounds;
     private float cameraLowerBounds;
 
     private bool isActive;
-
-    private Player playerRef;
     private List<GameObject> platforms;
 
     public bool IsActive
@@ -22,23 +21,19 @@ public class PlatformRow : MonoBehaviour
         set { isActive = value; }
     }
 
-    public Player PlayerRef
-    {
-        get { return playerRef; }
-        set { playerRef = value; }
-    }
-
     public List<GameObject> Platforms
     {
         get { return platforms; }
+        set { platforms = value; }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraUpperBounds = transform.parent.GetComponent<Spawning>().CameraUpperBounds;
-        cameraLowerBounds = transform.parent.GetComponent<Spawning>().CameraLowerBounds;
-        extentsY = transform.parent.GetComponent<Spawning>().PlatformExtentsY;
+        spawner = transform.parent.GetComponent<Spawning>();
+        extentsY = spawner.PlatformExtentsY;
+        cameraUpperBounds = spawner.CameraUpperBounds;
+        cameraLowerBounds = spawner.CameraLowerBounds;
     }
 
     // Update is called once per frame
@@ -64,7 +59,7 @@ public class PlatformRow : MonoBehaviour
     /// </summary>
     private void Move()
     {
-        float speed = GameInfo.instance.moveSpeed * Time.deltaTime;
+        float speed = spawner.MoveSpeed * Time.deltaTime;
         transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
     }
 
@@ -101,7 +96,7 @@ public class PlatformRow : MonoBehaviour
     /// </summary>
     private void SpawnNextRow()
     {
-        transform.parent.GetComponent<Spawning>().SpawnRow();
+        spawner.SpawnRow();
     }
 
     /// <summary>
@@ -109,14 +104,6 @@ public class PlatformRow : MonoBehaviour
     /// </summary>
     public void SendPlatforms()
     {
-        platforms = new List<GameObject>();
-
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            platforms.Add(transform.GetChild(i).gameObject);
-        }
-
-        //SEND TO INPUT SCRIPT
         transform.parent.GetComponent<Spawning>().PlayerInstance.GetComponent<Player>().AddRowToQueue(this);
     }
 }
