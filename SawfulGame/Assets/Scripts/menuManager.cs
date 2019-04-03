@@ -24,7 +24,7 @@ public class menuManager : MonoBehaviour
 
     public void loadGame()
     {
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("TestSpawningScene", LoadSceneMode.Single);
     }
 
     public void loadMenu()
