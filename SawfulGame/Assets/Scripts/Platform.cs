@@ -60,11 +60,11 @@ public class Platform : MonoBehaviour
         text.GetComponent<TextMeshPro>().text = combo.ToLower();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Killzone"))
-        {
-            gameObject.GetComponent<ParticleSystem>().Play();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Killzone"))
+    //    {
+    //        gameObject.GetComponent<ParticleSystem>().Play();
+    //    }
+    //}
 }
