@@ -57,6 +57,6 @@ public class Platform : MonoBehaviour
             combo += combination[i].ToString();
         }
 
-        text.GetComponent<TextMeshPro>().text = combo;
+        text.GetComponent<TextMeshPro>().text = combo.ToLower();
     }
 }
