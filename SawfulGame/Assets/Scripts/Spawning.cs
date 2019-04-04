@@ -7,35 +7,28 @@ public class Spawning : MonoBehaviour
 {
     public int numCombo;
     public float spawnInterval;
-    public float moveSpeed;
     public GameObject spawn;
     public GameObject playerPrefab;
+    public GameObject[] platformPrefabs;
 
-    private PrefabVariation prefabVariation;
     private GameObject playerInstance;
     private float cameraUpperBounds;
     private float cameraLowerBounds;
     private float platformExtentsY;
     private float playerExtentsY;
 
+    #region COMMENTED OUT
+    //private KeyCode[] keys = new KeyCode[]
+    //{
+    //    KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
+    //    KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
+    //};
+    #endregion
+
     private KeyCode[] keys = new KeyCode[]
     {
-        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
-        KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
+        KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow
     };
-
-    #region Properties
-    public int NumCombo
-    {
-        get { return numCombo; }
-        set { numCombo = value; }
-    }
-
-    public float MoveSpeed
-    {
-        get { return moveSpeed; }
-        set { moveSpeed = value; }
-    }
 
     public GameObject PlayerInstance
     {
@@ -66,13 +59,11 @@ public class Spawning : MonoBehaviour
         get { return playerExtentsY; }
         set { playerExtentsY = value; }
     }
-    #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
-        prefabVariation = gameObject.GetComponent<PrefabVariation>();
         GetBoundsAndExtents();
         SetupGame();
     }
@@ -93,7 +84,7 @@ public class Spawning : MonoBehaviour
         cameraLowerBounds = Camera.main.transform.position.y - Camera.main.orthographicSize;
 
         //Get the extents for a row
-        Platform platformScript = prefabVariation.safePrefab.GetComponent<Platform>();
+        Platform platformScript = platformPrefabs[0].transform.GetChild(0).GetComponent<Platform>();
         Bounds platformBounds = platformScript.platform.GetComponent<SpriteRenderer>().bounds;
         platformExtentsY = platformBounds.extents.y;
 
@@ -116,12 +107,9 @@ public class Spawning : MonoBehaviour
     /// <returns>The spawned row</returns>
     public GameObject SpawnRow(Vector3 pos)
     {
-        GameObject row = prefabVariation.CreateRow();
-        row.transform.parent = transform;
-        row.transform.position = pos;
-
-        PlatformRow rowScript = row.GetComponent<PlatformRow>();
-        rowScript.Platforms = new List<GameObject>();
+        //Get a random row type
+        int rand = Random.Range(0, platformPrefabs.Length);
+        GameObject row = Instantiate(platformPrefabs[rand], pos, Quaternion.identity, transform);
 
         //Safe combination is always the last one in the list
         List<List<KeyCode>> combinations = GenerateCombinations();
@@ -149,8 +137,6 @@ public class Spawning : MonoBehaviour
                 platform.Combination = combinations[combinations.Count - 1];
                 platform.Target.transform.position = platform.transform.position + new Vector3(0, platformExtentsY + playerExtentsY, 0);
             }
-
-            rowScript.Platforms.Add(platform.gameObject);
         }
 
         return row;
@@ -162,13 +148,13 @@ public class Spawning : MonoBehaviour
     /// </summary>
     private List<List<KeyCode>> GenerateCombinations()
     {
-        List<List<KeyCode>> combinations = new List<List<KeyCode>>();
-
-        //Create room for the number of platforms in a row
-        for (int i = 0; i < prefabVariation.NumPlatforms; i++)
+        //Three lists for the 3 platforms
+        List<List<KeyCode>> combinations = new List<List<KeyCode>>()
         {
-            combinations.Add(new List<KeyCode>());
-        }
+            new List<KeyCode>(),
+            new List<KeyCode>(),
+            new List<KeyCode>()
+        };
 
         for (int i = 0; i < numCombo; i++)
         {

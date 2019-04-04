@@ -11,9 +11,13 @@ public class GameInfo : MonoBehaviour
     //Represents the game info that is stored across all scenes
     public static GameInfo instance;
 
+    public float moveSpeed;
+
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
+
+    private float initialMoveSpeed;
 
     public bool GameStart
     {
@@ -31,6 +35,12 @@ public class GameInfo : MonoBehaviour
     {
         get { return paused; }
         set { paused = value; }
+    }
+
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
     }
 
     void Awake()
@@ -59,6 +69,8 @@ public class GameInfo : MonoBehaviour
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
+        moveSpeed = instance.moveSpeed;
+        initialMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -99,7 +111,7 @@ public class GameInfo : MonoBehaviour
 
     public void ResetGame()
     {
-        
+        moveSpeed = initialMoveSpeed;
     }
 
     public void ExitGame()
