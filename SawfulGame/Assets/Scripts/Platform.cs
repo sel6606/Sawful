@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
     public GameObject platform;
     public GameObject target;
     public GameObject text;
+    public Color32 highlightColor;
 
     private bool isSafe;
     private List<KeyCode> combination;
@@ -42,7 +43,7 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HighlightCharacter(0);
     }
 
     /// <summary>
@@ -58,5 +59,26 @@ public class Platform : MonoBehaviour
         }
 
         text.GetComponent<TextMeshPro>().text = combo.ToLower();
+
+        //HighlightCharacter(0);
+    }
+
+    /// <summary>
+    /// Highlights the characters typed in correctly.
+    /// </summary>
+    /// <param name="comboIndex">The index of the combo that was typed correctly</param>
+    private void HighlightCharacter(int comboIndex)
+    {
+        TextMeshPro textMesh = text.GetComponent<TextMeshPro>();
+
+        if (textMesh.mesh.colors32 != null && textMesh.mesh.colors32.Length != 0)
+        {
+            textMesh.textInfo.characterInfo[comboIndex].highlightColor = highlightColor;
+            textMesh.textInfo.characterInfo[comboIndex].strikethroughColor = highlightColor;
+            for (int i = 0; i < textMesh.mesh.colors32.Length; i++)
+            {
+                textMesh.mesh.colors32[i] = highlightColor;
+            }
+        }
     }
 }

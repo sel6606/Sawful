@@ -265,6 +265,9 @@ MonoBehaviour:
   platform: {fileID: 801358217181812728}
   target: {fileID: 208587941772908870}
   text: {fileID: 3101113757285894611}
+  highlightColor:
+    serializedVersion: 2
+    rgba: 4278190335
 --- !u!1 &3101113757285894611
 GameObject:
   m_ObjectHideFlags: 0

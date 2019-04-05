@@ -365,3 +365,6 @@ MonoBehaviour:
   platform: {fileID: 3482520341898476247}
   target: {fileID: 4156707426199569125}
   text: {fileID: 1171996146193890737}
+  highlightColor:
+    serializedVersion: 2
+    rgba: 4278190335
