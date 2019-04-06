@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numCombo: 1
   spawnInterval: 3
-  moveSpeed: 3
+  moveSpeed: 2.5
   spawn: {fileID: 1859063686}
   playerPrefab: {fileID: 3746714483398909468, guid: 55274ee7790bb3a42b8dec6b8f70aeb4,
     type: 3}
@@ -193,11 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a73516f90abfd4a9b195af3ac42de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCombo: 3
-  maxSpeed: 4.5
+  maxCombo: 2
+  maxSpeed: 4
   maxPlatforms: 4
   increaseInterval: 2
-  countdown: 6
+  countdown: 8
 --- !u!1 &594107063
 GameObject:
   m_ObjectHideFlags: 0

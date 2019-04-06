@@ -12,6 +12,8 @@ public class Platform : MonoBehaviour
     public GameObject target;
     public GameObject text;
     public Color32 highlightColor;
+    public Material fadedMat;
+    public Material visibleMat;
 
     private bool isSafe;
     private List<KeyCode> combination;
@@ -43,7 +45,7 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HighlightCharacter(0);
+        
     }
 
     /// <summary>
@@ -58,27 +60,52 @@ public class Platform : MonoBehaviour
             combo += combination[i].ToString();
         }
 
-        text.GetComponent<TextMeshPro>().text = combo.ToLower();
-
-        //HighlightCharacter(0);
+        text.GetComponent<TextMeshPro>().text = combo;
     }
 
     /// <summary>
-    /// Highlights the characters typed in correctly.
+    /// Highlights all of the characters in the combination up to the index.
+    /// To remove the highlights pass an index less than 0.
     /// </summary>
-    /// <param name="comboIndex">The index of the combo that was typed correctly</param>
-    private void HighlightCharacter(int comboIndex)
+    /// <param name="comboIndex">Index of the character to stop at</param>
+    public void HighlightCharacter(int comboIndex)
     {
-        TextMeshPro textMesh = text.GetComponent<TextMeshPro>();
-
-        if (textMesh.mesh.colors32 != null && textMesh.mesh.colors32.Length != 0)
+        //Special Case: Reset color back to normal
+        if (comboIndex < 0)
         {
-            textMesh.textInfo.characterInfo[comboIndex].highlightColor = highlightColor;
-            textMesh.textInfo.characterInfo[comboIndex].strikethroughColor = highlightColor;
-            for (int i = 0; i < textMesh.mesh.colors32.Length; i++)
-            {
-                textMesh.mesh.colors32[i] = highlightColor;
-            }
+            DisplayCombination();
+            return;
         }
+
+        string combo = "<color=#" + ColorUtility.ToHtmlStringRGBA(highlightColor) + ">";
+
+        for (int i = 0; i < combination.Count; i++)
+        {
+            //Stop highlighting after the index
+            if (i == comboIndex + 1)
+            {
+                combo += "</color>";
+            }
+
+            combo += combination[i].ToString();
+        }
+
+        text.GetComponent<TextMeshPro>().text = combo;
+    }
+
+    /// <summary>
+    /// Makes the combination more visible.
+    /// </summary>
+    public void MakeVisible()
+    {
+        text.GetComponent<TextMeshPro>().fontMaterial = visibleMat;
+    }
+
+    /// <summary>
+    /// Makes the combination faded.
+    /// </summary>
+    public void MakeFaded()
+    {
+        text.GetComponent<TextMeshPro>().fontMaterial = fadedMat;
     }
 }

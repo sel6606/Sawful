@@ -21,7 +21,7 @@ public class Spawning : MonoBehaviour
     private KeyCode[] keys = new KeyCode[]
     {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
-        KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
+        KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.W, KeyCode.Y
     };
 
     #region Properties
@@ -249,23 +249,26 @@ public class Spawning : MonoBehaviour
         PlatformRow rowScript = row.GetComponent<PlatformRow>();
         rowScript.IsActive = true;
 
-        //Spawn the player on the safe platfrom
         for (int i = 0; i < row.transform.childCount; i++)
         {
             Platform platform = row.transform.GetChild(i).gameObject.GetComponent<Platform>();
 
+            //No combination for first row spawned
+            platform.Combination = new List<KeyCode>();
+
+            //Spawn player on safe platform
             if (platform.CompareTag("Safe"))
             {
                 Vector3 playerPos = platform.Target.transform.position;
                 playerInstance = Instantiate(playerPrefab, playerPos, Quaternion.identity, platform.transform);
-
-                break;
             }
         }
 
         rowScript.SendPlatforms();
 
         Debug.Log("Spawned first row and player");
+
+        bool spawnedSecond = false;
 
         //Keep spawning rows until conditions are met to spawn a row off screen
         while (spawnPos.y + platformExtentsY + spawnInterval < cameraUpperBounds)
@@ -279,6 +282,13 @@ public class Spawning : MonoBehaviour
             nextRowScript.IsActive = true;
             nextRowScript.SendPlatforms();
 
+            //Highlight the second row
+            if (!spawnedSecond)
+            {
+                spawnedSecond = true;
+                nextRowScript.HighlightRow();
+            }
+
             Debug.Log("Spawned another row on screen");
         }
 
@@ -286,7 +296,15 @@ public class Spawning : MonoBehaviour
         spawnPos += new Vector3(0, platformExtentsY + spawnInterval, 0);
 
         //Spawn the last row off screen
-        SpawnRow(spawnPos);
+        GameObject lastRow = SpawnRow(spawnPos);
+        PlatformRow lastRowScript = lastRow.GetComponent<PlatformRow>();
+
+        //Highlight the second row
+        if (!spawnedSecond)
+        {
+            spawnedSecond = true;
+            lastRowScript.HighlightRow();
+        }
 
         Debug.Log("Spawned last row off screen");
     }
