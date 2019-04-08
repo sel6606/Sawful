@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numCombo: 1
   spawnInterval: 3
-  moveSpeed: 2.5
+  moveSpeed: 1.5
   spawn: {fileID: 1859063686}
   playerPrefab: {fileID: 3746714483398909468, guid: 55274ee7790bb3a42b8dec6b8f70aeb4,
     type: 3}
