@@ -7,28 +7,35 @@ public class Spawning : MonoBehaviour
 {
     public int numCombo;
     public float spawnInterval;
+    public float moveSpeed;
     public GameObject spawn;
     public GameObject playerPrefab;
-    public GameObject[] platformPrefabs;
 
+    private PrefabVariation prefabVariation;
     private GameObject playerInstance;
     private float cameraUpperBounds;
     private float cameraLowerBounds;
     private float platformExtentsY;
     private float playerExtentsY;
 
-    #region COMMENTED OUT
-    //private KeyCode[] keys = new KeyCode[]
-    //{
-    //    KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
-    //    KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z
-    //};
-    #endregion
-
     private KeyCode[] keys = new KeyCode[]
     {
-        KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow
+        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
+        KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.W, KeyCode.Y
     };
+
+    #region Properties
+    public int NumCombo
+    {
+        get { return numCombo; }
+        set { numCombo = value; }
+    }
+
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
+    }
 
     public GameObject PlayerInstance
     {
@@ -59,11 +66,13 @@ public class Spawning : MonoBehaviour
         get { return playerExtentsY; }
         set { playerExtentsY = value; }
     }
+    #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
+        prefabVariation = gameObject.GetComponent<PrefabVariation>();
         GetBoundsAndExtents();
         SetupGame();
     }
@@ -84,7 +93,7 @@ public class Spawning : MonoBehaviour
         cameraLowerBounds = Camera.main.transform.position.y - Camera.main.orthographicSize;
 
         //Get the extents for a row
-        Platform platformScript = platformPrefabs[0].transform.GetChild(0).GetComponent<Platform>();
+        Platform platformScript = prefabVariation.safePrefab.GetComponent<Platform>();
         Bounds platformBounds = platformScript.platform.GetComponent<SpriteRenderer>().bounds;
         platformExtentsY = platformBounds.extents.y;
 
@@ -107,9 +116,12 @@ public class Spawning : MonoBehaviour
     /// <returns>The spawned row</returns>
     public GameObject SpawnRow(Vector3 pos)
     {
-        //Get a random row type
-        int rand = Random.Range(0, platformPrefabs.Length);
-        GameObject row = Instantiate(platformPrefabs[rand], pos, Quaternion.identity, transform);
+        GameObject row = prefabVariation.CreateRow();
+        row.transform.parent = transform;
+        row.transform.position = pos;
+
+        PlatformRow rowScript = row.GetComponent<PlatformRow>();
+        rowScript.Platforms = new List<GameObject>();
 
         //Safe combination is always the last one in the list
         List<List<KeyCode>> combinations = GenerateCombinations();
@@ -137,6 +149,8 @@ public class Spawning : MonoBehaviour
                 platform.Combination = combinations[combinations.Count - 1];
                 platform.Target.transform.position = platform.transform.position + new Vector3(0, platformExtentsY + playerExtentsY, 0);
             }
+
+            rowScript.Platforms.Add(platform.gameObject);
         }
 
         return row;
@@ -148,13 +162,13 @@ public class Spawning : MonoBehaviour
     /// </summary>
     private List<List<KeyCode>> GenerateCombinations()
     {
-        //Three lists for the 3 platforms
-        List<List<KeyCode>> combinations = new List<List<KeyCode>>()
+        List<List<KeyCode>> combinations = new List<List<KeyCode>>();
+
+        //Create room for the number of platforms in a row
+        for (int i = 0; i < prefabVariation.NumPlatforms; i++)
         {
-            new List<KeyCode>(),
-            new List<KeyCode>(),
-            new List<KeyCode>()
-        };
+            combinations.Add(new List<KeyCode>());
+        }
 
         for (int i = 0; i < numCombo; i++)
         {
@@ -235,23 +249,26 @@ public class Spawning : MonoBehaviour
         PlatformRow rowScript = row.GetComponent<PlatformRow>();
         rowScript.IsActive = true;
 
-        //Spawn the player on the safe platfrom
         for (int i = 0; i < row.transform.childCount; i++)
         {
             Platform platform = row.transform.GetChild(i).gameObject.GetComponent<Platform>();
 
+            //No combination for first row spawned
+            platform.Combination = new List<KeyCode>();
+
+            //Spawn player on safe platform
             if (platform.CompareTag("Safe"))
             {
                 Vector3 playerPos = platform.Target.transform.position;
                 playerInstance = Instantiate(playerPrefab, playerPos, Quaternion.identity, platform.transform);
-
-                break;
             }
         }
 
         rowScript.SendPlatforms();
 
         Debug.Log("Spawned first row and player");
+
+        bool spawnedSecond = false;
 
         //Keep spawning rows until conditions are met to spawn a row off screen
         while (spawnPos.y + platformExtentsY + spawnInterval < cameraUpperBounds)
@@ -265,6 +282,13 @@ public class Spawning : MonoBehaviour
             nextRowScript.IsActive = true;
             nextRowScript.SendPlatforms();
 
+            //Highlight the second row
+            if (!spawnedSecond)
+            {
+                spawnedSecond = true;
+                nextRowScript.HighlightRow();
+            }
+
             Debug.Log("Spawned another row on screen");
         }
 
@@ -272,7 +296,15 @@ public class Spawning : MonoBehaviour
         spawnPos += new Vector3(0, platformExtentsY + spawnInterval, 0);
 
         //Spawn the last row off screen
-        SpawnRow(spawnPos);
+        GameObject lastRow = SpawnRow(spawnPos);
+        PlatformRow lastRowScript = lastRow.GetComponent<PlatformRow>();
+
+        //Highlight the second row
+        if (!spawnedSecond)
+        {
+            spawnedSecond = true;
+            lastRowScript.HighlightRow();
+        }
 
         Debug.Log("Spawned last row off screen");
     }
