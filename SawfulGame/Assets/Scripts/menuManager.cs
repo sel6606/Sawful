@@ -25,7 +25,7 @@ public class menuManager : MonoBehaviour
         if (currentScene == 1)
         {
             //score++; [DEBUG LEFTOVER]
-            //score = GameInfo.instance. [something here];
+            score = GameInfo.instance.Score;
             scoreText2.SetText("Score: {0}", score);
         }
 
@@ -34,11 +34,13 @@ public class menuManager : MonoBehaviour
     public void loadGame()
     {
         //GameInfo.instance.GameOver = false;
+        GameInfo.instance.ResetGame();
         SceneManager.LoadScene("TestSpawningScene", LoadSceneMode.Single);
     }
 
     public void loadMenu()
     {
+        GameInfo.instance.Paused = false;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
