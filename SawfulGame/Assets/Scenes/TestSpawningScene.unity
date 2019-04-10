@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxCombo: 2
-  maxSpeed: 3.5
+  maxSpeed: 4
   maxPlatforms: 4
   increaseInterval: 2
   countdown: 8
