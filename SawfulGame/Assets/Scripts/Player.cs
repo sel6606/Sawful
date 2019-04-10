@@ -63,15 +63,6 @@ public class Player : MonoBehaviour
                     {
                         currentInput.Add(keyPressed);
                     }
-                    if (currentInput.Count > 0)
-                    {
-                        pressCooldown -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        pressCooldown = maxTimeBetweenPresses;
-                        currentInput.Clear();
-                    }
                     ChangeRows();
                     break;
             }
@@ -85,43 +76,82 @@ public class Player : MonoBehaviour
 
     private void ChangeRows()
     {
-        Platform nextPlat = null;
-
-        foreach (GameObject g in activeRows[1].Platforms)
+        if(activeRows.Count > 1)
         {
-            List<KeyCode> platformCombo = g.GetComponent<Platform>().Combination;
+            activeRows[1].HighlightRow();
+        }
+        if (currentInput.Count > 0)
+        {
+            Platform nextPlat = null;
 
-            if (currentInput.Count >= platformCombo.Count)
+            bool fullMatch = false;
+            bool match = false;
+            bool reset = false;
+
+            foreach (GameObject g in activeRows[1].Platforms)
             {
-                bool match = true;
-                for (int i = 0; i < platformCombo.Count; i++)
+                List<KeyCode> platformCombo = g.GetComponent<Platform>().Combination;
+
+                if (currentInput.Count > platformCombo.Count)
                 {
-                    if(currentInput[i] != platformCombo[i])
+                    reset = true;
+                    break;
+                }
+
+                if (currentInput.Count > 0)
+                {
+                    if (platformCombo[currentInput.Count - 1] == currentInput[currentInput.Count - 1])
                     {
-                        match = false;
+                        if (currentInput.Count == platformCombo.Count)
+                        {
+                            fullMatch = true;
+                            g.GetComponent<Platform>().HighlightCharacter(currentInput.Count - 1);
+                        }
+                        else
+                        {
+                            match = true;
+                            g.GetComponent<Platform>().HighlightCharacter(currentInput.Count - 1);
+                        }
+                    }
+
+                    if (fullMatch)
+                    {
+                        nextPlat = g.GetComponent<Platform>();
+                        break;
                     }
                 }
-
-                if(match)
-                {
-                    nextPlat = g.GetComponent<Platform>();
-                }
             }
-        }
 
-        if (nextPlat != null)
-        {
-            gameObject.transform.position = nextPlat.Target.transform.position;
-            gameObject.transform.parent = nextPlat.transform;
-            activeRows.RemoveAt(0);
-
-            if(!nextPlat.IsSafe)
+            if (!fullMatch && !match)
             {
-                GameInfo.instance.GameOver = true;
+                reset = true;
             }
 
-            currentInput.Clear();
-            pressCooldown = maxTimeBetweenPresses;
+            if (reset)
+            {
+                reset = false;
+                foreach (GameObject g in activeRows[1].Platforms)
+                {
+                    g.GetComponent<Platform>().HighlightCharacter(-1);
+                }
+
+                GetComponent<CameraShake>().IsShaking = true;
+                currentInput.Clear();
+            }
+
+            if (nextPlat != null)
+            {
+                gameObject.transform.position = nextPlat.Target.transform.position;
+                gameObject.transform.parent = nextPlat.transform;
+                activeRows.RemoveAt(0);
+
+                if (!nextPlat.IsSafe)
+                {
+                    GameInfo.instance.GameOver = true;
+                }
+
+                currentInput.Clear();
+            }
         }
 
     }
