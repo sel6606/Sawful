@@ -32,7 +32,7 @@ public class menuManager : MonoBehaviour
 
         if(GameInfo.instance.GameOver && !gameOver)
         {
-            toggleGameOver();
+            StartCoroutine(toggleGameOver());
             gameOver = true;
         }
 
@@ -64,8 +64,10 @@ public class menuManager : MonoBehaviour
         }
     }
 
-    public void toggleGameOver()
+    public IEnumerator toggleGameOver()
     {
+        yield return new WaitForSeconds(3);
+
         if (!gameOverPanel.activeInHierarchy)
         {
             gameOverPanel.SetActive(true);
