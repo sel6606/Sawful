@@ -16,6 +16,36 @@ public class GameInfo : MonoBehaviour
     private bool paused = false;
     private int score = 0;
 
+    private KeyCode[] startKeys = new KeyCode[]
+    {
+        KeyCode.A,
+        KeyCode.B,
+        KeyCode.C,
+        KeyCode.D,
+        KeyCode.E,
+        KeyCode.F,
+        KeyCode.G,
+        KeyCode.H,
+        KeyCode.I,
+        KeyCode.J,
+        KeyCode.K,
+        KeyCode.L,
+        KeyCode.M,
+        KeyCode.N,
+        KeyCode.O,
+        KeyCode.P,
+        KeyCode.Q,
+        KeyCode.R,
+        KeyCode.S,
+        KeyCode.T,
+        KeyCode.U,
+        KeyCode.V,
+        KeyCode.W,
+        KeyCode.X,
+        KeyCode.Y,
+        KeyCode.Z
+    };
+
     public bool GameStart
     {
         get { return gameStart; }
@@ -71,15 +101,21 @@ public class GameInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameStart && Input.GetKeyDown(KeyCode.Space))
+        if (!gameStart)
         {
-            StartGame();
+            for (int i = 0; i < startKeys.Length; i++)
+            {
+                if (Input.GetKeyDown(startKeys[i]))
+                {
+                    StartGame();
+                    break;
+                }
+            }
         }
 
         if(gameOver && Input.GetKeyDown(KeyCode.Space))
         {
-            gameOver = false;
-            gameStart = false;
+            ResetGame();
             ReloadMainMenu();
         }
 
