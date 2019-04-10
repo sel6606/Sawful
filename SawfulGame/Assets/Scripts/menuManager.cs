@@ -12,6 +12,7 @@ public class menuManager : MonoBehaviour
     public float score;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreText2;
+    public bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,12 @@ public class menuManager : MonoBehaviour
             scoreText2.SetText("Score: {0}", score);
         }
 
+        if(GameInfo.instance.GameOver && !gameOver)
+        {
+            toggleGameOver();
+            gameOver = true;
+        }
+
     }
 
     public void loadGame()
@@ -41,6 +48,7 @@ public class menuManager : MonoBehaviour
     public void loadMenu()
     {
         GameInfo.instance.Paused = false;
+        GameInfo.instance.GameOver = false;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 

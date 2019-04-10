@@ -149,6 +149,10 @@ public class Player : MonoBehaviour
                 {
                     GameInfo.instance.GameOver = true;
                 }
+                else
+                {
+                    GameInfo.instance.Score++;
+                }
 
                 currentInput.Clear();
             }
