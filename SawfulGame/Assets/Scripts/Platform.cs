@@ -11,6 +11,9 @@ public class Platform : MonoBehaviour
     public GameObject platform;
     public GameObject target;
     public GameObject text;
+    public Color32 highlightColor;
+    public Material fadedMat;
+    public Material visibleMat;
 
     private bool isSafe;
     private List<KeyCode> combination;
@@ -57,6 +60,52 @@ public class Platform : MonoBehaviour
             combo += combination[i].ToString();
         }
 
-        text.GetComponent<TextMeshPro>().text = combo.ToLower();
+        text.GetComponent<TextMeshPro>().text = combo;
+    }
+
+    /// <summary>
+    /// Highlights all of the characters in the combination up to the index.
+    /// To remove the highlights pass an index less than 0.
+    /// </summary>
+    /// <param name="comboIndex">Index of the character to stop at</param>
+    public void HighlightCharacter(int comboIndex)
+    {
+        //Special Case: Reset color back to normal
+        if (comboIndex < 0)
+        {
+            DisplayCombination();
+            return;
+        }
+
+        string combo = "<color=#" + ColorUtility.ToHtmlStringRGBA(highlightColor) + ">";
+
+        for (int i = 0; i < combination.Count; i++)
+        {
+            //Stop highlighting after the index
+            if (i == comboIndex + 1)
+            {
+                combo += "</color>";
+            }
+
+            combo += combination[i].ToString();
+        }
+
+        text.GetComponent<TextMeshPro>().text = combo;
+    }
+
+    /// <summary>
+    /// Makes the combination more visible.
+    /// </summary>
+    public void MakeVisible()
+    {
+        text.GetComponent<TextMeshPro>().fontMaterial = visibleMat;
+    }
+
+    /// <summary>
+    /// Makes the combination faded.
+    /// </summary>
+    public void MakeFaded()
+    {
+        text.GetComponent<TextMeshPro>().fontMaterial = fadedMat;
     }
 }

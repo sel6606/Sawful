@@ -14,6 +14,7 @@ public class GameInfo : MonoBehaviour
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
+    private int score = 0;
 
     public bool GameStart
     {
@@ -31,6 +32,12 @@ public class GameInfo : MonoBehaviour
     {
         get { return paused; }
         set { paused = value; }
+    }
+
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
     }
 
     void Awake()
@@ -99,7 +106,10 @@ public class GameInfo : MonoBehaviour
 
     public void ResetGame()
     {
-        
+        gameStart = false;
+        paused = false;
+        gameOver = false;
+        score = 0;
     }
 
     public void ExitGame()

@@ -265,6 +265,11 @@ MonoBehaviour:
   platform: {fileID: 801358217181812728}
   target: {fileID: 208587941772908870}
   text: {fileID: 3101113757285894611}
+  highlightColor:
+    serializedVersion: 2
+    rgba: 4280657400
+  fadedMat: {fileID: 2100000, guid: 3ef270decfd77ca4ebce97fbc9070374, type: 2}
+  visibleMat: {fileID: 2100000, guid: 785056d6dc14b9b41aa3b0ddf27f1052, type: 2}
 --- !u!1 &3101113757285894611
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +326,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: 3ef270decfd77ca4ebce97fbc9070374, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -380,7 +385,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3ef270decfd77ca4ebce97fbc9070374, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

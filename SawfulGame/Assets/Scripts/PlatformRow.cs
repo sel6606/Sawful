@@ -106,4 +106,15 @@ public class PlatformRow : MonoBehaviour
     {
         transform.parent.GetComponent<Spawning>().PlayerInstance.GetComponent<Player>().AddRowToQueue(this);
     }
+
+    /// <summary>
+    /// Makes the combo text for the platforms more visible.
+    /// </summary>
+    public void HighlightRow()
+    {
+        for (int i = 0; i < platforms.Count; i++)
+        {
+            platforms[i].GetComponent<Platform>().MakeVisible();
+        }
+    }
 }

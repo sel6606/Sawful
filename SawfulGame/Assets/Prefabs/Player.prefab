@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6220010614052985520}
   - component: {fileID: 502920130408937612}
   - component: {fileID: 2860023380990473255}
+  - component: {fileID: 8365598168201976154}
   - component: {fileID: 1589651344347423292}
   - component: {fileID: 1811228201629414053}
   m_Layer: 0
@@ -95,6 +96,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTimeBetweenPresses: 1
+--- !u!114 &8365598168201976154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746714483398909468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cb5ac0b1ce8a84a998b44f400d6d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.1
+  duration: 0.15
 --- !u!58 &1589651344347423292
 CircleCollider2D:
   m_ObjectHideFlags: 0
