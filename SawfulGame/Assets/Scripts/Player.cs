@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     public GameObject deathPrefab;
     private float pressCooldown;
     private bool jumping = false;
+    public Sprite jumpSprite;
+    public Sprite idleSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -158,10 +160,10 @@ public class Player : MonoBehaviour
             if (nextPlat != null)
             {
                 //gameObject.transform.position = nextPlat.Target.transform.position;
+                GetComponent<SpriteRenderer>().sprite = jumpSprite;
                 StartCoroutine(Jump(nextPlat, !nextPlat.IsSafe));
-                GetComponent<Animator>().SetBool("Jump", true);
-                GetComponent<Animator>().SetBool("Idle", false);
-                gameObject.transform.parent = nextPlat.transform;
+                GetComponent<Animator>().enabled = false;
+                gameObject.transform.parent = null;
                 activeRows.RemoveAt(0);
 
                 if (!nextPlat.IsSafe)
@@ -184,9 +186,9 @@ public class Player : MonoBehaviour
     IEnumerator Jump(Platform moveDestination, bool death)
     {
         jumping = true;
-        //GetComponent<Animator>().SetBool("Jump", true);
-        //GetComponent<Animator>().SetBool("Idle", false);
-        float moveTime = 0.667f;
+
+        //float moveTime = 0.667f;
+        float moveTime = 0.8f;
         while(moveTime > 0.0f)
         {
             moveTime -= Time.deltaTime;
@@ -194,8 +196,6 @@ public class Player : MonoBehaviour
 
             if(moveTime <= 0.0f)
             {
-                GetComponent<Animator>().SetBool("Idle", true);
-                GetComponent<Animator>().SetBool("Jump", false);
                 break;
             }
 
@@ -213,6 +213,9 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
         jumping = false;
+        GetComponent<SpriteRenderer>().sprite = idleSprite;
+        GetComponent<Animator>().enabled = true;
+        gameObject.transform.parent = moveDestination.transform;
         yield return null;
     }
 

@@ -99,6 +99,8 @@ MonoBehaviour:
   maxTimeBetweenPresses: 1
   deathPrefab: {fileID: 9119965538678532686, guid: 5563a7296c7f6f142908f44215651b64,
     type: 3}
+  jumpSprite: {fileID: 21300000, guid: a7c725647d9acf24ab45af610e6246fa, type: 3}
+  idleSprite: {fileID: 21300000, guid: a18e2f2825dc88e47a9447bbc1d836a2, type: 3}
 --- !u!114 &8365598168201976154
 MonoBehaviour:
   m_ObjectHideFlags: 0
