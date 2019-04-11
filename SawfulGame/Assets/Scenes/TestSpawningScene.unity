@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a73516f90abfd4a9b195af3ac42de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCombo: 2
-  maxSpeed: 4
+  maxCombo: 3
+  maxSpeed: 3.5
   maxPlatforms: 4
   increaseInterval: 2
   countdown: 8
