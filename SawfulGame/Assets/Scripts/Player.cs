@@ -37,7 +37,11 @@ public class Player : MonoBehaviour
     };
 
     public float maxTimeBetweenPresses;
+    public GameObject deathPrefab;
     private float pressCooldown;
+    private bool jumping = false;
+    public Sprite jumpSprite;
+    public Sprite idleSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -57,15 +61,29 @@ public class Player : MonoBehaviour
                     //If we get here, either nothing has been initialized or we are at the top row and we do not currently need to do any checks
                     break;
                 default: //Two or more rows are active
-                    KeyCode keyPressed = GetCurrentKey();
-
-                    if(keyPressed != KeyCode.None)
+                    if (!jumping)
                     {
-                        currentInput.Add(keyPressed);
+                        KeyCode keyPressed = GetCurrentKey();
+
+                        if (keyPressed != KeyCode.None)
+                        {
+                            currentInput.Add(keyPressed);
+                        }
+                        ChangeRows();
                     }
-                    ChangeRows();
                     break;
             }
+        }
+
+        if(!jumping && GameInfo.instance.GameOver)
+        {
+            GameObject temp = Instantiate(deathPrefab);
+            temp.transform.position = gameObject.transform.position;
+            foreach (Rigidbody2D r in temp.GetComponentsInChildren<Rigidbody2D>())
+            {
+                r.AddForce(new Vector2(1, 1));
+            }
+            Destroy(this.gameObject);
         }
     }
 
@@ -141,8 +159,11 @@ public class Player : MonoBehaviour
 
             if (nextPlat != null)
             {
-                gameObject.transform.position = nextPlat.Target.transform.position;
-                gameObject.transform.parent = nextPlat.transform;
+                //gameObject.transform.position = nextPlat.Target.transform.position;
+                GetComponent<SpriteRenderer>().sprite = jumpSprite;
+                StartCoroutine(Jump(nextPlat, !nextPlat.IsSafe));
+                GetComponent<Animator>().enabled = false;
+                gameObject.transform.parent = null;
                 activeRows.RemoveAt(0);
 
                 if (!nextPlat.IsSafe)
@@ -155,9 +176,47 @@ public class Player : MonoBehaviour
                 }
 
                 currentInput.Clear();
+
+                
             }
         }
 
+    }
+
+    IEnumerator Jump(Platform moveDestination, bool death)
+    {
+        jumping = true;
+
+        //float moveTime = 0.667f;
+        float moveTime = 0.8f;
+        while(moveTime > 0.0f)
+        {
+            moveTime -= Time.deltaTime;
+            transform.position = Vector3.Lerp(moveDestination.target.transform.position, transform.position, moveTime);
+
+            if(moveTime <= 0.0f)
+            {
+                break;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        if(death)
+        {
+            GameObject temp = Instantiate(deathPrefab);
+            temp.transform.position = moveDestination.target.transform.position;
+            foreach(Rigidbody2D r in temp.GetComponentsInChildren<Rigidbody2D>())
+            {
+                r.AddForce(new Vector2(1, 1));
+            }
+            Destroy(this.gameObject);
+        }
+        jumping = false;
+        GetComponent<SpriteRenderer>().sprite = idleSprite;
+        GetComponent<Animator>().enabled = true;
+        gameObject.transform.parent = moveDestination.transform;
+        yield return null;
     }
 
     private KeyCode GetCurrentKey()
