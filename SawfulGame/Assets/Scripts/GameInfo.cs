@@ -14,6 +14,9 @@ public class GameInfo : MonoBehaviour
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
+    private bool easy = false;
+    private bool normal = false;
+    private bool hard = false;
     private int score = 0;
 
     private KeyCode[] startKeys = new KeyCode[]
@@ -62,6 +65,24 @@ public class GameInfo : MonoBehaviour
     {
         get { return paused; }
         set { paused = value; }
+    }
+
+    public bool Easy
+    {
+        get { return easy; }
+        set { easy = value; }
+    }
+
+    public bool Normal
+    {
+        get { return normal; }
+        set { normal = value; }
+    }
+
+    public bool Hard
+    {
+        get { return hard; }
+        set { hard = value; }
     }
 
     public int Score
@@ -138,6 +159,13 @@ public class GameInfo : MonoBehaviour
     public void StartGame()
     {
         gameStart = true;
+    }
+
+    public void ResetDifficulty()
+    {
+        easy = false;
+        normal = false;
+        hard = false;
     }
 
     public void ResetGame()

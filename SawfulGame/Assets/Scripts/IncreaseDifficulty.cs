@@ -37,7 +37,7 @@ public class IncreaseDifficulty : MonoBehaviour
         increaseInterval = maxPlatforms <= prefabVariation.NumPlatforms ? increaseInterval : totalIncreases / (maxPlatforms - prefabVariation.NumPlatforms);
 
         counter = totalIncreases;
-        comboIncrementorInterval = totalIncreases / (maxCombo - spawner.NumCombo);
+        comboIncrementorInterval = maxCombo <= spawner.NumCombo ? 0 : totalIncreases / (maxCombo - spawner.NumCombo);
     }
 
     // Update is called once per frame

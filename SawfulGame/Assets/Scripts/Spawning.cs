@@ -18,10 +18,17 @@ public class Spawning : MonoBehaviour
     private float platformExtentsY;
     private float playerExtentsY;
 
-    private KeyCode[] keys = new KeyCode[]
+    private KeyCode[] keys;
+
+    private KeyCode[] normalKeys = new KeyCode[]
     {
         KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
         KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.W, KeyCode.Y
+    };
+
+    private KeyCode[] specialKeys = new KeyCode[] 
+    {
+        KeyCode.Exclaim, KeyCode.At, KeyCode.Hash, KeyCode.Dollar, KeyCode.Percent, KeyCode.Ampersand, KeyCode.Asterisk, KeyCode.LeftParen, KeyCode.RightParen
     };
 
     #region Properties
@@ -72,6 +79,15 @@ public class Spawning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameInfo.instance.Easy || GameInfo.instance.Normal)
+        {
+            keys = normalKeys;
+        }
+        else if (GameInfo.instance.Hard)
+        {
+            keys = specialKeys;
+        }
+
         prefabVariation = gameObject.GetComponent<PrefabVariation>();
         GetBoundsAndExtents();
         SetupGame();

@@ -23,11 +23,31 @@ public class menuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentScene == 1)
+        if (currentScene == 1 || currentScene == 2 || currentScene == 3)
         {
             //score++; [DEBUG LEFTOVER]
             score = GameInfo.instance.Score;
             scoreText2.SetText("Score: {0}", score);
+        }
+
+        //DEBUG
+        else if (currentScene == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            {
+                GameInfo.instance.Easy = true;
+                SceneManager.LoadScene("Easy", LoadSceneMode.Single);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightBracket))
+            {
+                GameInfo.instance.Normal = true;
+                SceneManager.LoadScene("Normal", LoadSceneMode.Single);
+            }
+            else if (Input.GetKeyDown(KeyCode.Backslash))
+            {
+                GameInfo.instance.Hard = true;
+                SceneManager.LoadScene("Hard", LoadSceneMode.Single);
+            }
         }
 
         if(GameInfo.instance.GameOver && !gameOver)
@@ -40,15 +60,14 @@ public class menuManager : MonoBehaviour
 
     public void loadGame()
     {
-        //GameInfo.instance.GameOver = false;
         GameInfo.instance.ResetGame();
         SceneManager.LoadScene("TestSpawningScene", LoadSceneMode.Single);
     }
 
     public void loadMenu()
     {
-        GameInfo.instance.Paused = false;
-        GameInfo.instance.GameOver = false;
+        GameInfo.instance.ResetDifficulty();
+        GameInfo.instance.ResetGame();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 

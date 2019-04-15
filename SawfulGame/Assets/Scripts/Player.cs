@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 {
     private List<PlatformRow> activeRows = new List<PlatformRow>();
     private List<KeyCode> currentInput = new List<KeyCode>();
-    private KeyCode[] possibleKeys = new KeyCode[]
+    private KeyCode[] possibleKeys;
+
+    private KeyCode[] normalKeys = new KeyCode[]
     {
         KeyCode.A,
         KeyCode.B,
@@ -36,6 +38,11 @@ public class Player : MonoBehaviour
         KeyCode.Z
     };
 
+    private KeyCode[] specialKeys = new KeyCode[]
+    {
+        KeyCode.Exclaim, KeyCode.At, KeyCode.Hash, KeyCode.Dollar, KeyCode.Percent, KeyCode.Ampersand, KeyCode.Asterisk, KeyCode.LeftParen, KeyCode.RightParen
+    };
+
     public float maxTimeBetweenPresses;
     public GameObject deathPrefab;
     private float pressCooldown;
@@ -46,6 +53,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (GameInfo.instance.Easy || GameInfo.instance.Normal)
+        {
+            possibleKeys = normalKeys;
+        }
+        else if (GameInfo.instance.Hard)
+        {
+            possibleKeys = specialKeys;
+        }
+
         pressCooldown = maxTimeBetweenPresses;
     }
 
