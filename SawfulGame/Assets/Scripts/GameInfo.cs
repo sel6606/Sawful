@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Difficulty
+{
+    Easy,
+    Normal,
+    Hard
+}
+
 /// <summary>
 /// Script to keep track of various game information required between multiple scenes
 /// </summary>
@@ -11,12 +18,10 @@ public class GameInfo : MonoBehaviour
     //Represents the game info that is stored across all scenes
     public static GameInfo instance;
 
+    private Difficulty mode = Difficulty.Easy;
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
-    private bool easy = false;
-    private bool normal = false;
-    private bool hard = false;
     private int score = 0;
 
     private KeyCode[] startKeys = new KeyCode[]
@@ -49,6 +54,12 @@ public class GameInfo : MonoBehaviour
         KeyCode.Z
     };
 
+    public Difficulty Mode
+    {
+        get { return mode; }
+        set { mode = value; }
+    }
+
     public bool GameStart
     {
         get { return gameStart; }
@@ -65,24 +76,6 @@ public class GameInfo : MonoBehaviour
     {
         get { return paused; }
         set { paused = value; }
-    }
-
-    public bool Easy
-    {
-        get { return easy; }
-        set { easy = value; }
-    }
-
-    public bool Normal
-    {
-        get { return normal; }
-        set { normal = value; }
-    }
-
-    public bool Hard
-    {
-        get { return hard; }
-        set { hard = value; }
     }
 
     public int Score
@@ -114,9 +107,11 @@ public class GameInfo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        mode = instance.mode;
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
+        score = instance.score;
     }
 
     // Update is called once per frame
@@ -159,13 +154,6 @@ public class GameInfo : MonoBehaviour
     public void StartGame()
     {
         gameStart = true;
-    }
-
-    public void ResetDifficulty()
-    {
-        easy = false;
-        normal = false;
-        hard = false;
     }
 
     public void ResetGame()

@@ -57,7 +57,7 @@ public class Platform : MonoBehaviour
 
         for (int i = 0; i < combination.Count; i++)
         {
-            combo += combination[i].ToString();
+            combo += ConvertKey(combination[i]);
         }
 
         text.GetComponent<TextMeshPro>().text = combo;
@@ -87,7 +87,7 @@ public class Platform : MonoBehaviour
                 combo += "</color>";
             }
 
-            combo += combination[i].ToString();
+            combo += ConvertKey(combination[i]);
         }
 
         text.GetComponent<TextMeshPro>().text = combo;
@@ -107,5 +107,52 @@ public class Platform : MonoBehaviour
     public void MakeFaded()
     {
         text.GetComponent<TextMeshPro>().fontMaterial = fadedMat;
+    }
+
+    /// <summary>
+    /// Converts keycodes to their string representation
+    /// </summary>
+    /// <param name="key">keycode to convert</param>
+    /// <returns>the string representation of the keycode</returns>
+    private string ConvertKey(KeyCode key)
+    {
+        string conversion = key.ToString();
+
+        //Special Keys
+        switch (key)
+        {
+            case KeyCode.Exclaim:
+                conversion = "!";
+                break;
+            case KeyCode.At:
+                conversion = "@";
+                break;
+            case KeyCode.Hash:
+                conversion = "#";
+                break;
+            case KeyCode.Dollar:
+                conversion = "$";
+                break;
+            case KeyCode.Percent:
+                conversion = "%";
+                break;
+            case KeyCode.Caret:
+                conversion = "^";
+                break;
+            case KeyCode.Ampersand:
+                conversion = "&";
+                break;
+            case KeyCode.Asterisk:
+                conversion = "*";
+                break;
+            case KeyCode.LeftParen:
+                conversion = "(";
+                break;
+            case KeyCode.RightParen:
+                conversion = ")";
+                break;
+        }
+
+        return conversion;
     }
 }

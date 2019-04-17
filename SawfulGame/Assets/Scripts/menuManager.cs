@@ -30,23 +30,20 @@ public class menuManager : MonoBehaviour
             scoreText2.SetText("Score: {0}", score);
         }
 
-        //DEBUG
+        //DEBUG (Remove when UI is implemented)
         else if (currentScene == 0)
         {
             if (Input.GetKeyDown(KeyCode.LeftBracket))
             {
-                GameInfo.instance.Easy = true;
-                SceneManager.LoadScene("Easy", LoadSceneMode.Single);
+                LoadEasy();
             }
             else if (Input.GetKeyDown(KeyCode.RightBracket))
             {
-                GameInfo.instance.Normal = true;
-                SceneManager.LoadScene("Normal", LoadSceneMode.Single);
+                LoadNormal();
             }
             else if (Input.GetKeyDown(KeyCode.Backslash))
             {
-                GameInfo.instance.Hard = true;
-                SceneManager.LoadScene("Hard", LoadSceneMode.Single);
+                LoadHard();
             }
         }
 
@@ -58,6 +55,27 @@ public class menuManager : MonoBehaviour
 
     }
 
+    public void LoadHard()
+    {
+        GameInfo.instance.ResetGame();
+        GameInfo.instance.Mode = Difficulty.Hard;
+        SceneManager.LoadScene("Hard", LoadSceneMode.Single);
+    }
+
+    public void LoadNormal()
+    {
+        GameInfo.instance.ResetGame();
+        GameInfo.instance.Mode = Difficulty.Normal;
+        SceneManager.LoadScene("Normal", LoadSceneMode.Single);
+    }
+
+    public void LoadEasy()
+    {
+        GameInfo.instance.ResetGame();
+        GameInfo.instance.Mode = Difficulty.Easy;
+        SceneManager.LoadScene("Easy", LoadSceneMode.Single);
+    }
+
     public void loadGame()
     {
         GameInfo.instance.ResetGame();
@@ -66,7 +84,6 @@ public class menuManager : MonoBehaviour
 
     public void loadMenu()
     {
-        GameInfo.instance.ResetDifficulty();
         GameInfo.instance.ResetGame();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
