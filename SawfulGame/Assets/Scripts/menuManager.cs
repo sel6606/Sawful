@@ -23,7 +23,7 @@ public class menuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentScene == 1 || currentScene == 2 || currentScene == 3)
+        if (currentScene == 1)
         {
             //score++; [DEBUG LEFTOVER]
             score = GameInfo.instance.Score;
@@ -33,17 +33,21 @@ public class menuManager : MonoBehaviour
         //DEBUG (Remove when UI is implemented)
         else if (currentScene == 0)
         {
-            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 LoadEasy();
             }
-            else if (Input.GetKeyDown(KeyCode.RightBracket))
+            else if (Input.GetKeyDown(KeyCode.LeftBracket))
             {
                 LoadNormal();
             }
-            else if (Input.GetKeyDown(KeyCode.Backslash))
+            else if (Input.GetKeyDown(KeyCode.RightBracket))
             {
                 LoadHard();
+            }
+            else if (Input.GetKeyDown(KeyCode.Backslash))
+            {
+                LoadInsane();
             }
         }
 
@@ -55,25 +59,28 @@ public class menuManager : MonoBehaviour
 
     }
 
+    public void LoadInsane()
+    {
+        GameInfo.instance.SetDifficulty(Difficulty.Insane);
+        loadGame();
+    }
+
     public void LoadHard()
     {
-        GameInfo.instance.ResetGame();
-        GameInfo.instance.Mode = Difficulty.Hard;
-        SceneManager.LoadScene("Hard", LoadSceneMode.Single);
+        GameInfo.instance.SetDifficulty(Difficulty.Hard);
+        loadGame();
     }
 
     public void LoadNormal()
     {
-        GameInfo.instance.ResetGame();
-        GameInfo.instance.Mode = Difficulty.Normal;
-        SceneManager.LoadScene("Normal", LoadSceneMode.Single);
+        GameInfo.instance.SetDifficulty(Difficulty.Normal);
+        loadGame();
     }
 
     public void LoadEasy()
     {
-        GameInfo.instance.ResetGame();
-        GameInfo.instance.Mode = Difficulty.Easy;
-        SceneManager.LoadScene("Easy", LoadSceneMode.Single);
+        GameInfo.instance.SetDifficulty(Difficulty.Easy);
+        loadGame();
     }
 
     public void loadGame()

@@ -25,6 +25,9 @@ public class IncreaseDifficulty : MonoBehaviour
     {
         spawner = gameObject.GetComponent<Spawning>();
         prefabVariation = gameObject.GetComponent<PrefabVariation>();
+
+        SetDifficulty();
+
         timer = countdown;
 
         //The 1 line if-statements are used to make sure things don't go wrong
@@ -49,6 +52,45 @@ public class IncreaseDifficulty : MonoBehaviour
             {
                 IncrementDifficulty();
             }
+        }
+    }
+
+    /// <summary>
+    /// Changes the settings based on the difficulty selected
+    /// </summary>
+    private void SetDifficulty()
+    {
+        if (GameInfo.instance.Mode == Difficulty.Easy)
+        {
+            maxCombo = 1;
+            maxSpeed = 4.5f;
+            maxPlatforms = 4;
+            increaseInterval = 2;
+            countdown = 10;
+        }
+        else if (GameInfo.instance.Mode == Difficulty.Normal)
+        {
+            maxCombo = 2;
+            maxSpeed = 3.3f;
+            maxPlatforms = 4;
+            increaseInterval = 2;
+            countdown = 8;
+        }
+        else if (GameInfo.instance.Mode == Difficulty.Hard)
+        {
+            maxCombo = 3;
+            maxSpeed = 3.5f;
+            maxPlatforms = 4;
+            increaseInterval = 2;
+            countdown = 8;
+        }
+        else if (GameInfo.instance.Mode == Difficulty.Insane)
+        {
+            maxCombo = 2;
+            maxSpeed = 4.5f;
+            maxPlatforms = 6;
+            increaseInterval = 2;
+            countdown = 10;
         }
     }
 

@@ -8,42 +8,6 @@ public class Player : MonoBehaviour
     private List<KeyCode> currentInput = new List<KeyCode>();
     private KeyCode[] possibleKeys;
 
-    private KeyCode[] normalKeys = new KeyCode[]
-    {
-        KeyCode.A,
-        KeyCode.B,
-        KeyCode.C,
-        KeyCode.D,
-        KeyCode.E,
-        KeyCode.F,
-        KeyCode.G,
-        KeyCode.H,
-        KeyCode.I,
-        KeyCode.J,
-        KeyCode.K,
-        KeyCode.L,
-        KeyCode.M,
-        KeyCode.N,
-        KeyCode.O,
-        KeyCode.P,
-        KeyCode.Q,
-        KeyCode.R,
-        KeyCode.S,
-        KeyCode.T,
-        KeyCode.U,
-        KeyCode.V,
-        KeyCode.W,
-        KeyCode.X,
-        KeyCode.Y,
-        KeyCode.Z
-    };
-
-    private KeyCode[] specialKeys = new KeyCode[]
-    {
-        KeyCode.Exclaim, KeyCode.At, KeyCode.Hash, KeyCode.Dollar, KeyCode.Percent, KeyCode.Caret, KeyCode.Ampersand, KeyCode.Asterisk, KeyCode.LeftParen,
-        KeyCode.RightParen
-    };
-
     public float maxTimeBetweenPresses;
     public GameObject deathPrefab;
     private float pressCooldown;
@@ -54,15 +18,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameInfo.instance.Mode == Difficulty.Easy || GameInfo.instance.Mode == Difficulty.Normal)
-        {
-            possibleKeys = normalKeys;
-        }
-        else if (GameInfo.instance.Mode == Difficulty.Hard)
-        {
-            possibleKeys = specialKeys;
-        }
-
+        possibleKeys = GameInfo.instance.Keys;
         pressCooldown = maxTimeBetweenPresses;
     }
 

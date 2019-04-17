@@ -12,12 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 45a001a817b143043969cee713f59733
   - enabled: 1
-    path: Assets/Scenes/Easy.unity
-    guid: c5951fc4af586b94db912e0734196bfe
-  - enabled: 1
-    path: Assets/Scenes/Normal.unity
-    guid: 634f10585e29f804091fff20833268cc
-  - enabled: 1
-    path: Assets/Scenes/Hard.unity
-    guid: 42582c134ee1e1a45b74af918ff0f279
+    path: Assets/Scenes/TestSpawningScene.unity
+    guid: fc62afe20ee6d574e9583842dd8a8928
   m_configObjects: {}

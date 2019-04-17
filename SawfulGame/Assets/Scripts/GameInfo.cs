@@ -6,7 +6,8 @@ public enum Difficulty
 {
     Easy,
     Normal,
-    Hard
+    Hard,
+    Insane
 }
 
 /// <summary>
@@ -19,12 +20,13 @@ public class GameInfo : MonoBehaviour
     public static GameInfo instance;
 
     private Difficulty mode = Difficulty.Easy;
+    private KeyCode[] keys = new KeyCode[] { };
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
     private int score = 0;
 
-    private KeyCode[] startKeys = new KeyCode[]
+    private KeyCode[] normalKeys = new KeyCode[]
     {
         KeyCode.A,
         KeyCode.B,
@@ -54,10 +56,20 @@ public class GameInfo : MonoBehaviour
         KeyCode.Z
     };
 
+    private KeyCode[] specialKeys = new KeyCode[]
+    {
+        KeyCode.Exclaim, KeyCode.At, KeyCode.Hash, KeyCode.Dollar, KeyCode.Percent, KeyCode.Caret, KeyCode.Ampersand, KeyCode.Asterisk, KeyCode.LeftParen,
+        KeyCode.RightParen
+    };
+
     public Difficulty Mode
     {
         get { return mode; }
-        set { mode = value; }
+    }
+
+    public KeyCode[] Keys
+    {
+        get { return keys; }
     }
 
     public bool GameStart
@@ -108,6 +120,7 @@ public class GameInfo : MonoBehaviour
     void Start()
     {
         mode = instance.mode;
+        keys = instance.keys;
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
@@ -117,14 +130,25 @@ public class GameInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //NOTE: We may want to move this logic elsewhere since it is being run on the main menu.
+        //It works though because when we load the game scene, we reset gameStart back to false.
+        //So, nothing is broken but if you want to make the code better you can move it somewhere better, or detect for the main menu.
         if (!gameStart)
         {
-            for (int i = 0; i < startKeys.Length; i++)
+            for (int i = 0; i < keys.Length; i++)
             {
-                if (Input.GetKeyDown(startKeys[i]))
+                if (mode == Difficulty.Easy || mode == Difficulty.Normal || mode == Difficulty.Hard)
                 {
-                    StartGame();
-                    break;
+                    if (Input.GetKeyDown(keys[i]))
+                    {
+                        StartGame();
+                        break;
+                    }
+                }
+                else if (mode == Difficulty.Insane)
+                {
+                    //Implement logic for detecting the special keys
+                    //Make sure you call StartGame()
                 }
             }
         }
@@ -169,6 +193,20 @@ public class GameInfo : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+    }
+
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        mode = difficulty;
+
+        if (mode == Difficulty.Easy || mode == Difficulty.Normal || mode == Difficulty.Hard)
+        {
+            keys = normalKeys;
+        }
+        else if (mode == Difficulty.Insane)
+        {
+            keys = specialKeys;
         }
     }
 }
