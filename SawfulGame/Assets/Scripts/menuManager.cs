@@ -77,7 +77,7 @@ public class menuManager : MonoBehaviour
             gameOverPanel.SetActive(false);
         }
 
-        scoreText.SetText("Final Score: {0}", score);
+        scoreText.SetText("Final Score\r\n{0}", score);
     }
 
     public void exitGame()
