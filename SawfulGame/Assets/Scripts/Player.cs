@@ -204,6 +204,8 @@ public class Player : MonoBehaviour
         
         if(death)
         {
+            AudioManager.instance.PlayDeath();
+
             GameObject temp = Instantiate(deathPrefab);
             temp.transform.position = moveDestination.target.transform.position;
             foreach(Rigidbody2D r in temp.GetComponentsInChildren<Rigidbody2D>())

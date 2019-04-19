@@ -37,6 +37,8 @@ public class AudioManager : MonoBehaviour
         mainMenu = instance.mainMenu;
         inGame = instance.inGame;
         death = instance.death;
+
+        PlayMainMenu();
     }
 
     // Update is called once per frame
@@ -57,7 +59,7 @@ public class AudioManager : MonoBehaviour
             src.volume = 1.0f;
         }
         //decrease volume over time
-        for (float x = src.volume; x >= 0; x -= 0.1f)
+        for (float x = src.volume; x >= 0; x -= 0.3f)
         {
             src.volume = x;
             yield return new WaitForSeconds(.1f);
@@ -79,7 +81,7 @@ public class AudioManager : MonoBehaviour
         }
 
         //increase volume over time
-        for (float x = src.volume; x <= 1f; x += 0.1f)
+        for (float x = src.volume; x <= 1f; x += 0.3f)
         {
             src.volume = x;
             yield return new WaitForSeconds(.1f);
@@ -94,8 +96,9 @@ public class AudioManager : MonoBehaviour
         //the holy grail of code in this one line. Stops all current fading before switching tracks
         StopAllCoroutines();
 
-        //Fade out in game music
+        //Fade out in game music and death sound
         StartCoroutine(FadeOut(inGame));
+        StartCoroutine(FadeOut(death));
 
         //Fade in main menu music
         StartCoroutine(FadeIn(mainMenu));
@@ -125,7 +128,7 @@ public class AudioManager : MonoBehaviour
         StopAllCoroutines();
 
         //Fade out in-game music
-        StartCoroutine(FadeOut(inGame));
+        //StartCoroutine(FadeOut(inGame));
 
         //Fade in death sound
         StartCoroutine(FadeIn(death));

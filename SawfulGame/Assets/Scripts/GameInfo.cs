@@ -96,8 +96,6 @@ public class GameInfo : MonoBehaviour
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
-
-
     }
 
     // Update is called once per frame
