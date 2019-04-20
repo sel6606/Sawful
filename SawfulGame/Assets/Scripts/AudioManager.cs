@@ -96,9 +96,8 @@ public class AudioManager : MonoBehaviour
         //the holy grail of code in this one line. Stops all current fading before switching tracks
         StopAllCoroutines();
 
-        //Fade out in game music and death sound
+        //Fade out in game music
         StartCoroutine(FadeOut(inGame));
-        StartCoroutine(FadeOut(death));
 
         //Fade in main menu music
         StartCoroutine(FadeIn(mainMenu));
@@ -124,13 +123,6 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void PlayDeath()
     {
-        //the holy grail of code in this one line. Stops all current fading before switching tracks
-        StopAllCoroutines();
-
-        //Fade out in-game music
-        //StartCoroutine(FadeOut(inGame));
-
-        //Fade in death sound
-        StartCoroutine(FadeIn(death));
+        death.Play();
     }
 }
