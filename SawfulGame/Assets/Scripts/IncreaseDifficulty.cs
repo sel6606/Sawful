@@ -62,6 +62,12 @@ public class IncreaseDifficulty : MonoBehaviour
     {
         if (GameInfo.instance.Mode == Difficulty.Easy)
         {
+            //Base Values
+            spawner.NumCombo = 0;
+            spawner.MoveSpeed = 0;
+            prefabVariation.NumPlatforms = 0;
+
+            //Max Values
             maxCombo = 1;
             maxSpeed = 4.5f;
             maxPlatforms = 4;
@@ -70,6 +76,12 @@ public class IncreaseDifficulty : MonoBehaviour
         }
         else if (GameInfo.instance.Mode == Difficulty.Normal)
         {
+            //Base Values
+            spawner.NumCombo = 0;
+            spawner.MoveSpeed = 0;
+            prefabVariation.NumPlatforms = 0;
+
+            //Max Values
             maxCombo = 2;
             maxSpeed = 3.3f;
             maxPlatforms = 4;
@@ -78,19 +90,17 @@ public class IncreaseDifficulty : MonoBehaviour
         }
         else if (GameInfo.instance.Mode == Difficulty.Hard)
         {
+            //Base Values
+            spawner.NumCombo = 0;
+            spawner.MoveSpeed = 0;
+            prefabVariation.NumPlatforms = 0;
+
+            //Max Values
             maxCombo = 3;
             maxSpeed = 3.5f;
             maxPlatforms = 4;
             increaseInterval = 2;
             countdown = 8;
-        }
-        else if (GameInfo.instance.Mode == Difficulty.Insane)
-        {
-            maxCombo = 2;
-            maxSpeed = 4.5f;
-            maxPlatforms = 6;
-            increaseInterval = 2;
-            countdown = 10;
         }
     }
 

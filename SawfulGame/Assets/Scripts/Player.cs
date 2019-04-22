@@ -196,9 +196,19 @@ public class Player : MonoBehaviour
     {
         foreach (KeyCode kcode in possibleKeys)
         {
-            if (Input.GetKeyDown(kcode))
+            //Input for normal characters
+            if (GameInfo.instance.Setting == Setting.Normal)
             {
-                return kcode;
+                if (Input.GetKeyDown(kcode))
+                {
+                    return kcode;
+                }
+            }
+
+            //Input for special characters
+            else if (GameInfo.instance.Setting == Setting.Special)
+            {
+                //Put code to check for special characters
             }
         }
 

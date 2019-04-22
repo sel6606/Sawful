@@ -6,8 +6,13 @@ public enum Difficulty
 {
     Easy,
     Normal,
-    Hard,
-    Insane
+    Hard
+}
+
+public enum Setting
+{
+    Normal,
+    Special
 }
 
 /// <summary>
@@ -19,6 +24,7 @@ public class GameInfo : MonoBehaviour
     //Represents the game info that is stored across all scenes
     public static GameInfo instance;
 
+    private Setting setting = Setting.Normal;
     private Difficulty mode = Difficulty.Easy;
     private KeyCode[] keys = new KeyCode[] { };
     private bool gameStart = false;
@@ -62,9 +68,15 @@ public class GameInfo : MonoBehaviour
         KeyCode.RightParen
     };
 
+    public Setting Setting
+    {
+        get { return setting; }
+    }
+
     public Difficulty Mode
     {
         get { return mode; }
+        set { mode = value; }
     }
 
     public KeyCode[] Keys
@@ -119,8 +131,11 @@ public class GameInfo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Default to normal
+        keys = normalKeys;
+
+        setting = instance.setting;
         mode = instance.mode;
-        keys = instance.keys;
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
@@ -137,7 +152,8 @@ public class GameInfo : MonoBehaviour
         {
             for (int i = 0; i < keys.Length; i++)
             {
-                if (mode == Difficulty.Easy || mode == Difficulty.Normal || mode == Difficulty.Hard)
+                //Start logic for normal
+                if (setting == Setting.Normal)
                 {
                     if (Input.GetKeyDown(keys[i]))
                     {
@@ -145,7 +161,9 @@ public class GameInfo : MonoBehaviour
                         break;
                     }
                 }
-                else if (mode == Difficulty.Insane)
+
+                //Start logic for special
+                else if (setting == Setting.Special)
                 {
                     //Implement logic for detecting the special keys
                     //Make sure you call StartGame()
@@ -196,17 +214,21 @@ public class GameInfo : MonoBehaviour
         }
     }
 
-    public void SetDifficulty(Difficulty difficulty)
+    /// <summary>
+    /// To be used within the UI to switch between normal and special characters.
+    /// </summary>
+    /// <param name="settingValue">Integer representation of the enum to set.</param>
+    public void SetSetting(int settingValue)
     {
-        mode = difficulty;
+        setting = (Setting)settingValue;
 
-        if (mode == Difficulty.Easy || mode == Difficulty.Normal || mode == Difficulty.Hard)
-        {
-            keys = normalKeys;
-        }
-        else if (mode == Difficulty.Insane)
+        if (setting == Setting.Special)
         {
             keys = specialKeys;
+        }
+        else
+        {
+            keys = normalKeys;
         }
     }
 }

@@ -33,6 +33,17 @@ public class menuManager : MonoBehaviour
         //DEBUG (Remove when UI is implemented)
         else if (currentScene == 0)
         {
+            //Change setting (0 = Normal; 1 = Special)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GameInfo.instance.SetSetting(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GameInfo.instance.SetSetting(1);
+            }
+
+            //Change difficulty (Easy; Normal; Hard)
             if (Input.GetKeyDown(KeyCode.P))
             {
                 LoadEasy();
@@ -45,10 +56,6 @@ public class menuManager : MonoBehaviour
             {
                 LoadHard();
             }
-            else if (Input.GetKeyDown(KeyCode.Backslash))
-            {
-                LoadInsane();
-            }
         }
 
         if(GameInfo.instance.GameOver && !gameOver)
@@ -59,27 +66,21 @@ public class menuManager : MonoBehaviour
 
     }
 
-    public void LoadInsane()
-    {
-        GameInfo.instance.SetDifficulty(Difficulty.Insane);
-        loadGame();
-    }
-
     public void LoadHard()
     {
-        GameInfo.instance.SetDifficulty(Difficulty.Hard);
+        GameInfo.instance.Mode = Difficulty.Hard;
         loadGame();
     }
 
     public void LoadNormal()
     {
-        GameInfo.instance.SetDifficulty(Difficulty.Normal);
+        GameInfo.instance.Mode = Difficulty.Normal;
         loadGame();
     }
 
     public void LoadEasy()
     {
-        GameInfo.instance.SetDifficulty(Difficulty.Easy);
+        GameInfo.instance.Mode = Difficulty.Easy;
         loadGame();
     }
 
@@ -126,5 +127,10 @@ public class menuManager : MonoBehaviour
     public void exitGame()
     {
         Application.Quit();
+    }
+
+    public void ChangeSettings(int settingValue)
+    {
+        GameInfo.instance.SetSetting(settingValue);
     }
 }
