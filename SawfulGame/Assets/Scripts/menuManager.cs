@@ -30,16 +30,15 @@ public class menuManager : MonoBehaviour
             scoreText2.SetText("Score: {0}", score);
 
             //Show brief instructions if this is the first time playing
-            if (GameInfo.instance.FirstTime == "true")
+            if (GameInfo.instance.FirstTime)
             {
-                GameInfo.instance.FirstTime = "false";
-                PlayerPrefs.SetString("firstTime", "false");
+                GameInfo.instance.FirstTime = false;
 
                 toggleHowTo();
             }
 
             //Get rid of instructions once player started playing
-            if (howToPanel.activeInHierarchy && score == 1)
+            if (howToPanel.activeInHierarchy && GameInfo.instance.GameStart)
             {
                 toggleHowTo();
             }

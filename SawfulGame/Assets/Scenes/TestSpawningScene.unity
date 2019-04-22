@@ -244,30 +244,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1863605701}
-    - target: {fileID: 1445365107, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445365107, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
-    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
-      propertyPath: m_textAlignment
-      value: 258
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
 --- !u!114 &538937779 stripped
