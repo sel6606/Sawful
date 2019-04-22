@@ -244,6 +244,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1863605701}
+    - target: {fileID: 1445365107, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445365107, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+    - target: {fileID: 1445365108, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
+      propertyPath: m_textAlignment
+      value: 258
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
 --- !u!114 &538937779 stripped
@@ -270,12 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &538937782 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3249739726778156056, guid: 4f017c7930fb7454684cb8d26abe949c,
-    type: 3}
-  m_PrefabInstance: {fileID: 538937778}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &589936855
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +508,7 @@ PrefabInstance:
         type: 3}
       propertyPath: howToPanel
       value: 
-      objectReference: {fileID: 538937782}
+      objectReference: {fileID: 1997612835}
     - target: {fileID: 5674735624990218712, guid: 600d60db1f984524b9b201001574c40a,
         type: 3}
       propertyPath: gameOverPanel
@@ -646,6 +664,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1997612835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1997612835, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 538937778}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2647450668690460693
 PrefabInstance:
   m_ObjectHideFlags: 0

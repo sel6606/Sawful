@@ -11,6 +11,7 @@ public class GameInfo : MonoBehaviour
     //Represents the game info that is stored across all scenes
     public static GameInfo instance;
 
+    private string firstTime;
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
@@ -45,6 +46,12 @@ public class GameInfo : MonoBehaviour
         KeyCode.Y,
         KeyCode.Z
     };
+
+    public string FirstTime
+    {
+        get { return firstTime; }
+        set { firstTime = value; }
+    }
 
     public bool GameStart
     {
@@ -93,6 +100,7 @@ public class GameInfo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        firstTime = PlayerPrefs.GetString("firstTime", "true");
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
