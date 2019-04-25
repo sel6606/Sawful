@@ -125,6 +125,7 @@ public class GameInfo : MonoBehaviour
         {
             ResetGame();
             ReloadMainMenu();
+            AudioManager.instance.PlayMainMenu();
         }
 
         ExitGame();
