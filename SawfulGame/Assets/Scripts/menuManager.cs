@@ -58,6 +58,8 @@ public class menuManager : MonoBehaviour
 
     public void loadGame()
     {
+        AudioManager.instance.PlayInGame();
+
         //GameInfo.instance.GameOver = false;
         GameInfo.instance.ResetGame();
         SceneManager.LoadScene("TestSpawningScene", LoadSceneMode.Single);
@@ -65,6 +67,8 @@ public class menuManager : MonoBehaviour
 
     public void loadMenu()
     {
+        AudioManager.instance.PlayMainMenu();
+
         GameInfo.instance.Paused = false;
         GameInfo.instance.GameOver = false;
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);

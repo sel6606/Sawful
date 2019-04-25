@@ -21,6 +21,8 @@ public class Saw : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             GameInfo.instance.GameOver = true;
+
+            AudioManager.instance.PlayDeath();
         }
     }
 }
