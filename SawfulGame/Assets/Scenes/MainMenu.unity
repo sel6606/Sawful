@@ -179,16 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4140999195052363745, guid: ac4e69d70c6795a47a7cbfad765ba05d,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 53a683992227b2f4eb077c27b1d0d124, type: 3}
-    - target: {fileID: 4140999195052363746, guid: ac4e69d70c6795a47a7cbfad765ba05d,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b89d634de2d08a7458ff556263873b27, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4e69d70c6795a47a7cbfad765ba05d, type: 3}
 --- !u!1 &1049813984
@@ -268,7 +258,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1107999466 stripped
 MonoBehaviour:
@@ -358,7 +348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765470869
 GameObject:
@@ -492,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 2647450668590885784, guid: 42a6995c1e97af8459fe46675e1e7310,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2647450668590885784, guid: 42a6995c1e97af8459fe46675e1e7310,
         type: 3}
@@ -724,7 +714,7 @@ PrefabInstance:
     - target: {fileID: 5864219185536667597, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5864219185536667597, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
         type: 3}

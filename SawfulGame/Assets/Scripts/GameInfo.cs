@@ -27,6 +27,7 @@ public class GameInfo : MonoBehaviour
     private Setting setting = Setting.Normal;
     private Difficulty mode = Difficulty.Easy;
     private KeyCode[] keys = new KeyCode[] { };
+    private bool firstTime = true;
     private bool gameStart = false;
     private bool gameOver = false;
     private bool paused = false;
@@ -84,6 +85,12 @@ public class GameInfo : MonoBehaviour
         get { return keys; }
     }
 
+    public bool FirstTime
+    {
+        get { return firstTime; }
+        set { firstTime = value; }
+    }
+
     public bool GameStart
     {
         get { return gameStart; }
@@ -136,6 +143,7 @@ public class GameInfo : MonoBehaviour
 
         setting = instance.setting;
         mode = instance.mode;
+        firstTime = instance.firstTime;
         gameStart = instance.gameStart;
         gameOver = instance.gameOver;
         paused = instance.paused;
@@ -171,9 +179,9 @@ public class GameInfo : MonoBehaviour
             }
         }
 
-        if(gameOver && Input.GetKeyDown(KeyCode.Space))
+        //DEBUG controls
+        if(Input.GetKeyDown(KeyCode.BackQuote))
         {
-            ResetGame();
             ReloadMainMenu();
         }
 
@@ -186,7 +194,10 @@ public class GameInfo : MonoBehaviour
     /// </summary>
     public void ReloadMainMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        AudioManager.instance.PlayMainMenu();
+
+        ResetGame();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
     /// <summary>
@@ -217,18 +228,18 @@ public class GameInfo : MonoBehaviour
     /// <summary>
     /// To be used within the UI to switch between normal and special characters.
     /// </summary>
-    /// <param name="settingValue">Integer representation of the enum to set.</param>
-    public void SetSetting(int settingValue)
+    /// <param name="settingValue">Enum to set.</param>
+    public void SetSetting(Setting settingValue)
     {
-        setting = (Setting)settingValue;
+        setting = settingValue;
 
-        if (setting == Setting.Special)
-        {
-            keys = specialKeys;
-        }
-        else
+        if (setting == Setting.Normal)
         {
             keys = normalKeys;
+        }
+        else if (setting == Setting.Special)
+        {
+            keys = specialKeys;
         }
     }
 }

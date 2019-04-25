@@ -27,6 +27,23 @@ public class menuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Main Menu
+        if (currentScene == 0)
+        {
+            //Make sure normal is selected when coming from the game scene
+            if (GameInfo.instance.Setting == Setting.Normal && !normSelected)
+            {
+                normalCharacter();
+            }
+
+            //Make sure special is selected when coming from the game scene
+            else if (GameInfo.instance.Setting == Setting.Special && !specSelected)
+            {
+                specialCharacter();
+            }
+        }
+
+        //In Game
         if (currentScene == 1)
         {
             //score++; [DEBUG LEFTOVER]
@@ -56,11 +73,28 @@ public class menuManager : MonoBehaviour
 
     }
 
+    public void loadEasy()
+    {
+        GameInfo.instance.Mode = Difficulty.Easy;
+        loadGame();
+    }
+
+    public void loadNormal()
+    {
+        GameInfo.instance.Mode = Difficulty.Normal;
+        loadGame();
+    }
+
+    public void loadHard()
+    {
+        GameInfo.instance.Mode = Difficulty.Hard;
+        loadGame();
+    }
+
     public void loadGame()
     {
         AudioManager.instance.PlayInGame();
 
-        //GameInfo.instance.GameOver = false;
         GameInfo.instance.ResetGame();
         SceneManager.LoadScene("TestSpawningScene", LoadSceneMode.Single);
     }
@@ -69,8 +103,7 @@ public class menuManager : MonoBehaviour
     {
         AudioManager.instance.PlayMainMenu();
 
-        GameInfo.instance.Paused = false;
-        GameInfo.instance.GameOver = false;
+        GameInfo.instance.ResetGame();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
@@ -112,6 +145,9 @@ public class menuManager : MonoBehaviour
         //highlight clicked button if not already selected
         if (!normSelected)
         {
+            //Enables normal characters
+            GameInfo.instance.SetSetting(Setting.Normal);
+
             //highlight normal
             GameObject normChar = GameObject.Find("normalCharacterButton");
             ColorBlock normCol = normChar.GetComponent<Button>().colors;
@@ -139,6 +175,9 @@ public class menuManager : MonoBehaviour
         //highlight clicked button if not already selected
         if (!specSelected)
         {
+            //Enables special characters
+            GameInfo.instance.SetSetting(Setting.Special);
+
             //highlight special
             GameObject specChar = GameObject.Find("specialCharacterButton");
             ColorBlock specCol = specChar.GetComponent<Button>().colors;

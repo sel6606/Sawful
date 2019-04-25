@@ -160,8 +160,8 @@ public class Player : MonoBehaviour
     {
         jumping = true;
 
-        float moveTime = 0.2f;
-        //float moveTime = 0.8f;
+        float moveTime = 0.1f;
+        
         while(moveTime > 0.0f)
         {
             moveTime -= Time.deltaTime;
