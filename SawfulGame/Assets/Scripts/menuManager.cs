@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class menuManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class menuManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreText2;
     public bool gameOver = false;
+
+    public bool normSelected = true;
+    public bool specSelected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -97,5 +101,60 @@ public class menuManager : MonoBehaviour
     public void exitGame()
     {
         Application.Quit();
+    }
+
+    public void normalCharacter()
+    {
+        //highlight clicked button if not already selected
+        if (!normSelected)
+        {
+            //highlight normal
+            GameObject normChar = GameObject.Find("normalCharacterButton");
+            ColorBlock normCol = normChar.GetComponent<Button>().colors;
+            Color newCol = new Vector4(0.5943396f, 0.0f, 0.0f, 1.0f);
+            normCol.normalColor = newCol;
+            normCol.highlightedColor = normCol.normalColor;
+            normChar.GetComponent<Button>().colors = normCol;
+
+            //de-highlight special
+            GameObject specChar = GameObject.Find("specialCharacterButton");
+            ColorBlock specCol = specChar.GetComponent<Button>().colors;
+            Color newNormCol = new Vector4(0.8509f, 0.8509f, 0.8509f, 1.0f);
+            Color newHighCol = new Vector4(0.2924f, 0.2924f, 0.2924f, 1.0f);
+            specCol.normalColor = newNormCol;
+            specCol.highlightedColor = newHighCol;
+            specChar.GetComponent<Button>().colors = specCol;
+
+            normSelected = true;
+            specSelected = false;
+        }
+    }
+
+    public void specialCharacter()
+    {
+        //highlight clicked button if not already selected
+        if (!specSelected)
+        {
+            //highlight special
+            GameObject specChar = GameObject.Find("specialCharacterButton");
+            ColorBlock specCol = specChar.GetComponent<Button>().colors;
+            Color newCol = new Vector4(0.5943396f, 0.0f, 0.0f, 1.0f);
+            specCol.normalColor = newCol;
+            specCol.highlightedColor = specCol.normalColor;
+            specChar.GetComponent<Button>().colors = specCol;
+
+            //de-highlight normal
+            GameObject normChar = GameObject.Find("normalCharacterButton");
+            ColorBlock normCol = normChar.GetComponent<Button>().colors;
+            Color newNormCol = new Vector4(0.8509f, 0.8509f, 0.8509f, 1.0f);
+            Color newHighCol = new Vector4(0.2924f, 0.2924f, 0.2924f, 1.0f);
+            normCol.normalColor = newNormCol;
+            normCol.highlightedColor = newHighCol;
+            normChar.GetComponent<Button>().colors = normCol;
+
+            specSelected = true;
+            normSelected = false;
+        }
+     
     }
 }
