@@ -6,35 +6,7 @@ public class Player : MonoBehaviour
 {
     private List<PlatformRow> activeRows = new List<PlatformRow>();
     private List<KeyCode> currentInput = new List<KeyCode>();
-    private KeyCode[] possibleKeys = new KeyCode[]
-    {
-        KeyCode.A,
-        KeyCode.B,
-        KeyCode.C,
-        KeyCode.D,
-        KeyCode.E,
-        KeyCode.F,
-        KeyCode.G,
-        KeyCode.H,
-        KeyCode.I,
-        KeyCode.J,
-        KeyCode.K,
-        KeyCode.L,
-        KeyCode.M,
-        KeyCode.N,
-        KeyCode.O,
-        KeyCode.P,
-        KeyCode.Q,
-        KeyCode.R,
-        KeyCode.S,
-        KeyCode.T,
-        KeyCode.U,
-        KeyCode.V,
-        KeyCode.W,
-        KeyCode.X,
-        KeyCode.Y,
-        KeyCode.Z
-    };
+    private KeyCode[] possibleKeys;
 
     public float maxTimeBetweenPresses;
     public GameObject deathPrefab;
@@ -46,6 +18,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        possibleKeys = GameInfo.instance.Keys;
         pressCooldown = maxTimeBetweenPresses;
     }
 
@@ -225,9 +198,19 @@ public class Player : MonoBehaviour
     {
         foreach (KeyCode kcode in possibleKeys)
         {
-            if (Input.GetKeyDown(kcode))
+            //Input for normal characters
+            if (GameInfo.instance.Setting == Setting.Normal)
             {
-                return kcode;
+                if (Input.GetKeyDown(kcode))
+                {
+                    return kcode;
+                }
+            }
+
+            //Input for special characters
+            else if (GameInfo.instance.Setting == Setting.Special)
+            {
+                //Put code to check for special characters
             }
         }
 

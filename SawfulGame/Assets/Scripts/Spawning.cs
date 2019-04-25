@@ -18,11 +18,7 @@ public class Spawning : MonoBehaviour
     private float platformExtentsY;
     private float playerExtentsY;
 
-    private KeyCode[] keys = new KeyCode[]
-    {
-        KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N,
-        KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.W, KeyCode.Y
-    };
+    private KeyCode[] keys;
 
     #region Properties
     public int NumCombo
@@ -72,6 +68,7 @@ public class Spawning : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keys = GameInfo.instance.Keys;
         prefabVariation = gameObject.GetComponent<PrefabVariation>();
         GetBoundsAndExtents();
         SetupGame();

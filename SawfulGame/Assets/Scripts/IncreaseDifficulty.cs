@@ -25,6 +25,9 @@ public class IncreaseDifficulty : MonoBehaviour
     {
         spawner = gameObject.GetComponent<Spawning>();
         prefabVariation = gameObject.GetComponent<PrefabVariation>();
+
+        SetDifficulty();
+
         timer = countdown;
 
         //The 1 line if-statements are used to make sure things don't go wrong
@@ -37,7 +40,7 @@ public class IncreaseDifficulty : MonoBehaviour
         increaseInterval = maxPlatforms <= prefabVariation.NumPlatforms ? increaseInterval : totalIncreases / (maxPlatforms - prefabVariation.NumPlatforms);
 
         counter = totalIncreases;
-        comboIncrementorInterval = totalIncreases / (maxCombo - spawner.NumCombo);
+        comboIncrementorInterval = maxCombo <= spawner.NumCombo ? 0 : totalIncreases / (maxCombo - spawner.NumCombo);
     }
 
     // Update is called once per frame
@@ -49,6 +52,55 @@ public class IncreaseDifficulty : MonoBehaviour
             {
                 IncrementDifficulty();
             }
+        }
+    }
+
+    /// <summary>
+    /// Changes the settings based on the difficulty selected
+    /// </summary>
+    private void SetDifficulty()
+    {
+        if (GameInfo.instance.Mode == Difficulty.Easy)
+        {
+            //Base Values
+            spawner.NumCombo = 1;
+            spawner.MoveSpeed = 1.5f;
+            prefabVariation.NumPlatforms = 1;
+
+            //Max Values
+            maxCombo = 1;
+            maxSpeed = 4;
+            maxPlatforms = 4;
+            increaseInterval = 2;
+            countdown = 10;
+        }
+        else if (GameInfo.instance.Mode == Difficulty.Normal)
+        {
+            //Base Values
+            spawner.NumCombo = 1;
+            spawner.MoveSpeed = 2.2f;
+            prefabVariation.NumPlatforms = 1;
+
+            //Max Values
+            maxCombo = 2;
+            maxSpeed = 3.1f;
+            maxPlatforms = 5;
+            increaseInterval = 2;
+            countdown = 6;
+        }
+        else if (GameInfo.instance.Mode == Difficulty.Hard)
+        {
+            //Base Values
+            spawner.NumCombo = 1;
+            spawner.MoveSpeed = 2.8f;
+            prefabVariation.NumPlatforms = 3;
+
+            //Max Values
+            maxCombo = 3;
+            maxSpeed = 3;
+            maxPlatforms = 6;
+            increaseInterval = 2;
+            countdown = 4;
         }
     }
 
