@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         possibleKeys = GameInfo.instance.Keys;
+
+        if(GameInfo.instance.Setting == Setting.Special)
+        {
+            possibleKeys = GameInfo.instance.SpecialInputKeys.ToArray();
+        }
         pressCooldown = maxTimeBetweenPresses;
     }
 
@@ -211,6 +216,10 @@ public class Player : MonoBehaviour
             else if (GameInfo.instance.Setting == Setting.Special)
             {
                 //Put code to check for special characters
+                if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(kcode))
+                {
+                    return GameInfo.instance.ConvertToSpecial(kcode);
+                }
             }
         }
 

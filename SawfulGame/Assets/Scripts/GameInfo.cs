@@ -69,6 +69,10 @@ public class GameInfo : MonoBehaviour
         KeyCode.RightParen
     };
 
+    private List<KeyCode> specialInputKeys = new List<KeyCode>
+    {
+        KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9, KeyCode.Alpha0
+    };
     public Setting Setting
     {
         get { return setting; }
@@ -113,6 +117,11 @@ public class GameInfo : MonoBehaviour
     {
         get { return score; }
         set { score = value; }
+    }
+
+    public List<KeyCode> SpecialInputKeys
+    {
+        get { return specialInputKeys; }
     }
 
     void Awake()
@@ -175,6 +184,11 @@ public class GameInfo : MonoBehaviour
                 {
                     //Implement logic for detecting the special keys
                     //Make sure you call StartGame()
+                    if(Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(specialInputKeys[i]))
+                    {
+                        StartGame();
+                        break;
+                    }
                 }
             }
         }
@@ -240,6 +254,18 @@ public class GameInfo : MonoBehaviour
         else if (setting == Setting.Special)
         {
             keys = specialKeys;
+        }
+    }
+
+    public KeyCode ConvertToSpecial(KeyCode key)
+    {
+        if (specialInputKeys.Contains(key))
+        {
+            return specialKeys[specialInputKeys.IndexOf(key)];
+        }
+        else
+        {
+            return key;
         }
     }
 }
