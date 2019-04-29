@@ -14,8 +14,10 @@ public class HighScores
 
     public HighScores()
     {
+        names = new List<string>();
+        scores = new List<int>();
         names.AddRange(new string[] { "OOF", "YEE", "WHY", "AAA", "GOD", "ATH", "SLE", "NCA", "ABE", "MKA" });
-        scores.AddRange(new int[] { 99, 74, 68, 47, 42, 32, 29, 29, 24, 20 });
+        scores.AddRange(new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 });
     }
     public HighScores(GameObject[] scoreElements)
     {

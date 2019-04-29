@@ -10,6 +10,9 @@ public class menuManager : MonoBehaviour
     public int currentScene; //0 - main menu, 1 - main scene
     public GameObject howToPanel;
     public GameObject gameOverPanel;
+    public HighScoreManager highScoreManager;
+    public GameObject highScorePanel;
+    public GameObject highScorePanel2;
     public float score;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scoreText2;
@@ -121,6 +124,8 @@ public class menuManager : MonoBehaviour
 
     public IEnumerator toggleGameOver()
     {
+        highScoreManager.UpdateHighScores();
+
         yield return new WaitForSeconds(3);
 
         if (!gameOverPanel.activeInHierarchy)
@@ -133,6 +138,18 @@ public class menuManager : MonoBehaviour
         }
 
         scoreText.SetText("Final Score\r\n{0}", score);
+
+        if(gameOverPanel.activeSelf && highScoreManager.HasHighScore)
+        {
+            yield return new WaitForSeconds(1);
+            highScorePanel.SetActive(true);
+        }
+        else if(gameOverPanel.activeSelf)
+        {
+            yield return new WaitForSeconds(1);
+            highScorePanel2.SetActive(true);
+            highScoreManager.DisplayHighScores();
+        }
     }
 
     public void exitGame()
