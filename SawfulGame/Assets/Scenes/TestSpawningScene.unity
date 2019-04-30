@@ -991,7 +991,7 @@ PrefabInstance:
     - target: {fileID: 865094528566973834, guid: 4f017c7930fb7454684cb8d26abe949c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DisplayHighScores
+      value: InsertHighScore
       objectReference: {fileID: 0}
     - target: {fileID: 865094528566973834, guid: 4f017c7930fb7454684cb8d26abe949c,
         type: 3}
@@ -1023,6 +1023,171 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 865094528566973834, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528566973834, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193165865987769599, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: input1
+      value: 
+      objectReference: {fileID: 865094527770643400}
+    - target: {fileID: 1193165865987769599, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: input2
+      value: 
+      objectReference: {fileID: 865094527770643399}
+    - target: {fileID: 1193165865987769599, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: input3
+      value: 
+      objectReference: {fileID: 865094527770643398}
+    - target: {fileID: 1193165865987769599, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: b
+      value: 
+      objectReference: {fileID: 865094527770643397}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 865094527770643406}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetUppercase
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 865094527770643405}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetUppercase
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_ContentType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_KeyboardType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_CharacterValidation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 865094527770643404}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetUppercase
+      objectReference: {fileID: 0}
+    - target: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f017c7930fb7454684cb8d26abe949c, type: 3}
 --- !u!1 &865094527770643396 stripped
@@ -1031,6 +1196,108 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 865094527770643395}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &865094527770643397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 865094528566973834, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865094527770643398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 865094528929219707, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865094527770643399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 865094527540439685, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865094527770643400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 865094527328176969, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &865094527770643401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 865094528929219701, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &865094527770643402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 865094527540439687, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &865094527770643403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 865094527328176971, guid: 4f017c7930fb7454684cb8d26abe949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 865094527770643395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &865094527770643404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b549d7fc1b0bdc448bb5863cdb632e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865094527770643405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b549d7fc1b0bdc448bb5863cdb632e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &865094527770643406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865094527770643403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b549d7fc1b0bdc448bb5863cdb632e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &865094527770643407 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1193165865987769599, guid: 4f017c7930fb7454684cb8d26abe949c,

@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
     public GameObject[] scorePanels;
+    public TMP_InputField input1;
+    public TMP_InputField input2;
+    public TMP_InputField input3;
+    public Button b;
 
     private List<GameObject> namePanels;
     private List<GameObject> valuePanels;
@@ -45,7 +50,10 @@ public class HighScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(input1.text.Length == 1 && input2.text.Length == 1 && input3.text.Length == 1)
+        {
+            b.interactable = true;
+        }
     }
 
     public void LoadHighScores()
@@ -76,7 +84,24 @@ public class HighScoreManager : MonoBehaviour
 
     public void InsertHighScore()
     {
+        if(hasHighScore)
+        {
+            string name = input1.text + input2.text + input3.text;
+            name = name.ToUpper();
 
+            scoreValues.Insert(highScoreIndex, GameInfo.instance.Score);
+            nameValues.Insert(highScoreIndex, name);
+
+            scoreValues.RemoveAt(10);
+            nameValues.RemoveAt(10);
+
+            DisplayHighScores();
+
+            SaveLoad.highScores.names = nameValues;
+            SaveLoad.highScores.scores = scoreValues;
+
+            SaveLoad.Save();
+        }
     }
     public void DisplayHighScores()
     {

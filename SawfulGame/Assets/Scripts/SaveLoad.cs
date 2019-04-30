@@ -26,7 +26,7 @@ public static class SaveLoad
         if(File.Exists(Application.persistentDataPath+"/highScores.gd"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/highScores.gd", FileMode.Open);
             highScores = (HighScores)bf.Deserialize(file);
             file.Close();
             saveFileExists = true;
