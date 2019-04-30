@@ -141,12 +141,12 @@ public class menuManager : MonoBehaviour
 
         if(gameOverPanel.activeSelf && highScoreManager.HasHighScore)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             highScorePanel.SetActive(true);
         }
         else if(gameOverPanel.activeSelf)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             highScorePanel2.SetActive(true);
             highScoreManager.DisplayHighScores();
         }
