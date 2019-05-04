@@ -10,6 +10,7 @@ public class menuManager : MonoBehaviour
     public int currentScene; //0 - main menu, 1 - main scene
     public GameObject howToPanel;
     public GameObject gameOverPanel;
+    public GameObject creditPanel;
     public HighScoreManager highScoreManager;
     public GameObject highScorePanel;
     public GameObject highScorePanel2;
@@ -119,6 +120,18 @@ public class menuManager : MonoBehaviour
         else
         {
             howToPanel.SetActive(false);
+        }
+    }
+
+    public void toggleCredits()
+    {
+        if (!creditPanel.activeInHierarchy)
+        {
+            creditPanel.SetActive(true);
+        }
+        else
+        {
+            creditPanel.SetActive(false);
         }
     }
 
