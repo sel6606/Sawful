@@ -746,6 +746,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: gameCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 9210382460125863335, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210382460125863335, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9210382458301463186, guid: 4f017c7930fb7454684cb8d26abe949c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -851,16 +861,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9210382460125863335, guid: 4f017c7930fb7454684cb8d26abe949c,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9210382460125863335, guid: 4f017c7930fb7454684cb8d26abe949c,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5478430795461073137, guid: 4f017c7930fb7454684cb8d26abe949c,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1169,6 +1169,16 @@ PrefabInstance:
     - target: {fileID: 5478430794866351259, guid: 4f017c7930fb7454684cb8d26abe949c,
         type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478430795993643663, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478430795143397137, guid: 4f017c7930fb7454684cb8d26abe949c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -63,8 +63,8 @@ public class HighScoreManager : MonoBehaviour
             SaveLoad.Load();
         }
 
-        scoreValues = SaveLoad.highScores.scores;
-        nameValues = SaveLoad.highScores.names;
+        scoreValues = SaveLoad.highScores[(int)GameInfo.instance.Mode].scores;
+        nameValues = SaveLoad.highScores[(int)GameInfo.instance.Mode].names;
     }
 
     public void UpdateHighScores()
@@ -97,8 +97,8 @@ public class HighScoreManager : MonoBehaviour
 
             DisplayHighScores();
 
-            SaveLoad.highScores.names = nameValues;
-            SaveLoad.highScores.scores = scoreValues;
+            SaveLoad.highScores[(int)GameInfo.instance.Mode].names = nameValues;
+            SaveLoad.highScores[(int)GameInfo.instance.Mode].scores = scoreValues;
 
             SaveLoad.Save();
         }

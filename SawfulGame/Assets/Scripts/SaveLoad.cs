@@ -6,7 +6,7 @@ using System.IO;
 
 public static class SaveLoad
 {
-    public static HighScores highScores = new HighScores();
+    public static List<HighScores> highScores = new List<HighScores>() { new HighScores(), new HighScores(), new HighScores() };
 
     public static bool saveFileExists = false;
 
@@ -27,7 +27,7 @@ public static class SaveLoad
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/highScores.gd", FileMode.Open);
-            highScores = (HighScores)bf.Deserialize(file);
+            highScores = (List<HighScores>)bf.Deserialize(file);
             file.Close();
             saveFileExists = true;
             return true;
@@ -35,7 +35,11 @@ public static class SaveLoad
         else
         {
             saveFileExists = false;
-            highScores = new HighScores();
+            highScores = new List<HighScores>();
+
+            highScores.Add(new HighScores());
+            highScores.Add(new HighScores());
+            highScores.Add(new HighScores());
             return false;
         }
     }

@@ -591,6 +591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3469651325357216424, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3469651323947716963, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -746,6 +751,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4994113699755935617}
+    - target: {fileID: 3469651324550228384, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
+        type: 3}
+      propertyPath: m_text
+      value: 'Alexia Bernardo
+
+        Nicholas Cato
+
+        Max Kaiser
+
+        Seth Leyens
+
+        Aiden Thinn'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469651324550228384, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469651324550228384, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469651324550228384, guid: e4e379e8b3b4bdf4b882ace75c7e9002,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 63
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4e379e8b3b4bdf4b882ace75c7e9002, type: 3}
 --- !u!114 &4994113699755935617 stripped
@@ -772,6 +805,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuManager(menu)
       objectReference: {fileID: 0}
+    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
+        type: 3}
+      propertyPath: howToPanel
+      value: 
+      objectReference: {fileID: 1545108980}
+    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
+        type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 1337721329}
+    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
+        type: 3}
+      propertyPath: creditPanel
+      value: 
+      objectReference: {fileID: 387647309}
     - target: {fileID: 7475294284711946038, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -827,20 +875,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
-        type: 3}
-      propertyPath: howToPanel
-      value: 
-      objectReference: {fileID: 1545108980}
-    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
-        type: 3}
-      propertyPath: gameOverPanel
-      value: 
-      objectReference: {fileID: 1337721329}
-    - target: {fileID: 4994113699755935617, guid: 8ae997c1e5ba2e04b8d609371b88ca3a,
-        type: 3}
-      propertyPath: creditPanel
-      value: 
-      objectReference: {fileID: 387647309}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ae997c1e5ba2e04b8d609371b88ca3a, type: 3}
